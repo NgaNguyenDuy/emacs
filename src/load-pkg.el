@@ -18,8 +18,8 @@
 (use-package alchemist
   :ensure alchemist
   :config (progn
-            (global-company-mode 1)
-            ;; (add-hook 'elixir-mode-hook 'company-mode)
+            ;; (global-company-mode 1)
+            (add-hook 'elixir-mode-hook 'company-mode)
             ))
 
 ;;
