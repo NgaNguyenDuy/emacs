@@ -15,6 +15,18 @@
 ;; You should have received a copy of the GNU General Public License along
 ;; with this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
+
+;; Extra mode line faces
+(make-face 'mode-line-read-only-face)
+(make-face 'mode-line-modified-face)
+(make-face 'mode-line-folder-face)
+(make-face 'mode-line-filename-face)
+(make-face 'mode-line-position-face)
+(make-face 'mode-line-mode-face)
+(make-face 'mode-line-minor-mode-face)
+(make-face 'mode-line-process-face)
+(make-face 'mode-line-78col-face)
+
 (defun color-theme-seti ()
   "Color theme Seti - Dark theme ispired by Atom Seti."
   (interactive)
@@ -34,16 +46,30 @@
 
      (isearch ((t (:background "#151718" :foreground "#D4D7D6" :box (:line-width 1 :color "#4F99D3") :weight bold))))
      (lazy-highlight ((t (:background "#151718" :foreground "#858D8A" :box (:line-width 1 :color "#4F99D3")))))
-     (mode-line ((t (:foreground "#D4D7D6" :background "#0D1011" :underline))))
-     (mode-line-buffer-id ((t (:weight bold :foreground "#DCCD69"))))
-     (mode-line-emphasis ((t (:weight bold))))
-     (mode-line-highlight ((t (:box (:line-width 3 :color "#4F99D3")))))
-     (mode-line-inactive ((t (:weight light :foreground "#D4D7D6" :background "#1E2326"))))
+
      (secondary-selection ((t (:background "#1E2326"))))
      (trailing-whitespace ((t (:background "#0D1011"))))
      (match ((t (:weight bold :foreground "#151718" :background "#8BE03C"))))
      (next-error ((t (:inherit (region)))))
      (query-replace ((t (:inherit (isearch)))))
+
+
+     ;; Mode line
+     (mode-line ((t (:foreground "#D4D7D6" :background "#0D1011" :family "Righteous" :inverse-video nil :box (:line-width 6 :color "#0D1011" :style nil)))))
+     (mode-line-inactive ((t (:foreground "#D4D7D6" :background "#1E2326" :family "Righteous" :inverse-video nil :box (:line-width 6 :color "#1E2326" :style nil)))))
+     (mode-line-read-only-face ((t (:foreground "#4271ae" :inherit (mode-line-face) :box (:line-width 2 :color "#4271ae")))))
+     (mode-line-modified-face ((t (:foreground "#c82829" :background "#ffffff" :inherit (mode-line-face) :box (:line-width 2 :color "#c82829")))))
+     (mode-line-folder-face ((t (:foreground "gray60" :inherit (mode-line-face)))))
+     (mode-line-filename-face ((t (:foreground "#eab700" :inherit (mode-line-face) :weight bold))))
+     (mode-line-position-face ((t (:height 100 :inherit (mode-line-face) :family "Menlo"))))
+     (mode-line-mode-face ((t (:foreground "gray80" :inherit (mode-line-face)))))
+     (mode-line-minor-mode-face ((t (:foreground "gray40" :height 110 :inherit (mode-line-mode-face)))))
+     (mode-line-process-face ((t (:foreground "#718c00" :inherit (mode-line-face)))))
+     (mode-line-78col-face ((t (:foreground "black" :background "#eab700" :inherit (mode-line-position-face)))))
+     ;; (mode-line-buffer-id ((t (:weight bold :foreground "#DCCD69"))))
+     ;; (mode-line-emphasis ((t (:weight bold))))
+     ;; (mode-line-highlight ((t (:box (:line-width 3 :color "#4F99D3")))))
+
      
      ;; Font lock
      (font-lock-builtin-face ((t (:foreground "#A074C4"))))
@@ -81,7 +107,7 @@
      (company-scrollbar-bg ((t (:background "#BABAB9"))))
      
 
-     ;; paren match
+     ;; Parenthesis matching (built-in)
      ;;(set-face-foreground 'show-paren-match (face-foreground 'default))
      ;;(set-face-attribute 'show-paren-match nil :weight 'bold)
      (show-paren-match ((t (:foreground "#858D8A" :underline (:color "#4F99D3" :style line)))))

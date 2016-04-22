@@ -22,6 +22,7 @@
     (load-file (~get-cfg "themes/" theme-file))))
 
 (color-theme-seti)
+
 ;; (color-theme-custom)
 ;; (load-theme 'afternoon t)
 
@@ -173,6 +174,61 @@
  ;;                                 :family "Geneva"))))
 
  '(rst-level-1-face ((t (:embolden t))) t))
+
+;;
+;; Mode line setup
+;;
+(setq-default
+ mode-line-format
+ '(
+   ;; Position, including warning for 78 columns
+   (:propertize "%4l:" face mode-line-position-face)
+   (:eval (propertize "%3c" 'face
+                      (if (> (current-column) 78)
+                          'mode-line-78col-face
+                        'mode-line-position-face)))
+   ;; emacsclient [default -- keep?]
+   mode-line-client
+   "  "
+   ;; read-only or modified status
+   (:eval
+    (cond (buffer-read-only
+           (propertize " RO " 'face 'mode-line-read-only-face))
+          ((buffer-modified-p)
+           (propertize " ** " 'face 'mode-line-modified-face))
+          (t "      ")))
+   "    "
+   ;; directory and buffer/file name
+   (:propertize (:eval (shorten-directory default-directory 30))
+                face mode-line-folder-face)
+   (:propertize "%b"
+                face mode-line-filename-face)
+   ;; narrow [default -- keep?]
+   " %n "
+   ;; mode indicators: vc, recursive edit, major mode, minor modes, process, global
+   (vc-mode vc-mode)
+   "  %["
+   (:propertize mode-name
+                face mode-line-mode-face)
+   "%] "
+   (:eval (propertize (format-mode-line minor-mode-alist)
+                      'face 'mode-line-minor-mode-face))
+   (:propertize mode-line-process
+                face mode-line-process-face)
+   (global-mode-string global-mode-string)
+   "    "
+   ;; nyan-mode uses nyan cat as an alternative to %p
+   (:eval (when nyan-mode (list (nyan-create))))
+   ))
+
+
+
+
+;;
+;; Change height mini-buffer
+;;
+(with-current-buffer (get-buffer " *Echo Area 0*")
+  (setq-local face-remapping-alist '((default (:height 0.9) variable-pitch))))
 
 
 
