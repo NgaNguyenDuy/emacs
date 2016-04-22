@@ -1,8 +1,3 @@
-
-;; Require use-package
-(require 'use-package)
-
-
 ;; Numbering lines
 ;; (use-package linum
 ;;   :init (progn
@@ -26,8 +21,6 @@
             (global-company-mode 1)
             ;; (add-hook 'elixir-mode-hook 'company-mode)
             ))
-
-
 
 ;;
 ;; Load color theme
@@ -97,9 +90,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package helm-config
   :ensure helm
-  :config (use-package helm
-            :config (progn
-                      (helm-autoresize-mode 1)))
+  :commands (helm-find-files helm-buffers-list)
+  :init (use-package helm
+          :config (progn
+                    (helm-autoresize-mode 1)))
   )
 
 
@@ -119,6 +113,7 @@
 ;;   :ensure helm-swoop)
 (add-to-list 'load-path "~/src/emacs/src/local-pkgs/helm-swoop")
 (require 'helm-swoop)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Smart tab mode
