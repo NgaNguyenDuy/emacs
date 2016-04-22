@@ -18,6 +18,14 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
+;; load all local packages
+(let ((local-package-dir (~get-cfg "local-pkgs/")))
+  (dolist (package-dir (directory-files local-package-dir))
+    ;; Don't know why it not working
+    ;; (add-to-list 'load-path (~get-cfg local-package-dir package-dir))
+    (add-to-list 'load-path (concat local-package-dir package-dir))
+    ))
+
 
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))

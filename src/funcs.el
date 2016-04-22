@@ -55,6 +55,44 @@
     (indent-according-to-mode)))
 
 
+;;
+;; filter annoying messages
+;;
+(defvar message-filter-regexp-list '("^Starting new Ispell process \\[.+\\] \\.\\.\\.$"
+                                     "^Ispell process killed$")
+  "filter formatted message string to remove noisy messages")
+(defadvice message (around message-filter-by-regexp activate)
+  (if (not (ad-get-arg 0))
+      ad-do-it
+    (let ((formatted-string (apply 'format (ad-get-args 0))))
+      (if (and (stringp formatted-string)
+               (some (lambda (re) (string-match re formatted-string)) message-filter-regexp-list))
+          (save-excursion
+            (set-buffer "*Messages*")
+            (goto-char (point-max))
+            (insert formatted-string "\n"))
+        (progn
+          (ad-set-args 0 `("%s" ,formatted-string))
+          ad-do-it)))))
+
+
+;;
+;; Helper function for display buffer-name in modeline
+;;
+(defun shorten-directory (dir max-length)
+  "Show up to `max-length' characters of a directory name `dir'."
+  (let ((path (reverse (split-string (abbreviate-file-name dir) "/")))
+        (output ""))
+    (when (and path (equal "" (car path)))
+      (setq path (cdr path)))
+    (while (and path (< (length output) (- max-length 4)))
+      (setq output (concat (car path) "/" output))
+      (setq path (cdr path)))
+    (when path
+      (setq output (concat ".../" output)))
+    output))
+
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Hippie Expand flexible
