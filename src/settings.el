@@ -56,7 +56,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Smooth scrolling
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 ;; scroll one line at a time (less "jumpy" than defaults)
 ;; 3 lines at a time normally, 5 lines at a time with shift
 (setq mouse-wheel-scroll-amount '(2 ((shift) . 5)))
@@ -66,5 +65,13 @@
 (setq mouse-wheel-follow-mouse 't)
 ;; keyboard scroll one line at a time
 (setq scroll-step 1)
+
+;;
+;; Config nyan-mode
+;;
+(require 'nyan-mode)
+(nyan-mode 1)
+(nyan-start-animation)
+(setq nyan-wavy-trail t)
 
 (provide 'e:settings)
