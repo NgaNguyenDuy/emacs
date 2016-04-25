@@ -109,10 +109,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Buffer navigation with pattern matching and replacing
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; (use-package helm-swoop
-;;   :ensure helm-swoop)
-(add-to-list 'load-path "~/src/emacs/src/local-pkgs/helm-swoop")
-(require 'helm-swoop)
+(use-package helm-swoop
+  :ensure helm-swoop)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
