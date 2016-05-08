@@ -1,3 +1,6 @@
+;; Start emacs as daemon
+;; (server-start)
+
 ;;
 ;; Global variable
 ;;
