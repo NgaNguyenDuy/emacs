@@ -159,7 +159,6 @@ about what flexible matching means in this context."
 ;;
 ;; Rename current file interactive
 ;; source: http://steve.yegge.googlepages.com/my-dot-emacs-file;;
-
 (defun rename-file-and-buffer (new-name)
   "Renames both current buffer and file it's visiting to NEW-NAME."
   (interactive "sNew name: ")
@@ -174,5 +173,32 @@ about what flexible matching means in this context."
           (rename-buffer new-name)
           (set-visited-file-name new-name)
           (set-buffer-modified-p nil))))))
+
+;;
+;; Make script executable on saving
+;;
+(defun make-executable-on-save ()
+  "Make script executable on saving."
+  (interactive)
+  (if (not (= (shell-command (concat "test -x " (buffer-file-name))) 0))
+      (progn 
+        ;; This puts message in *Message* twice, but minibuffer
+        ;; output looks better.
+        (message (concat "Wrote " (buffer-file-name)))
+        (save-excursion
+          (goto-char (point-min))
+          (if (looking-at "^#!")
+              (if (= (shell-command  
+                      (concat "chmod u+x " (buffer-file-name)))
+                     0)
+                  (message (concat 
+                            "Wrote and made executable " 
+                            (buffer-file-name)))))))
+    ;; This puts message in *Message* twice, but minibuffer output
+    ;; looks better.
+    (message (concat "Wrote " (buffer-file-name)))))
+
+(add-hook 'after-save-hook 'make-executable-on-save)
+
 
 (provide 'e:funcs)
