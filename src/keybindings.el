@@ -21,10 +21,11 @@
 ;;
 (bind-key "<f2>" 'save-buffer)
 (bind-key "C-<f2>" 'buffer-menu)
+(bind-key "M-<f2>" 'rename-file-and-buffer)
 (bind-key "<f3>" 'helm-find-files)
 (bind-key "C-<f4>" 'kill-buffer)
 (bind-key "<f8>" 'helm-buffers-list)
-(bind-key "<f12>" 'helm-M-x)
+;; (bind-key "<f12>" 'helm-M-x)
 
 
 
