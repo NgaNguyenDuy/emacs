@@ -114,6 +114,22 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Rainbow delimiters
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package rainbow-delimiters
+  :ensure rainbow-delimiters
+  :config (progn
+            ;; Enable in emacs lisp buffer
+            (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
+            ;; Enables rainbow-delimiters-mode in Clojure buffers.
+            (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
+            ;; enables rainbow-delimiters-mode in other Lisp mode buffers.
+            (add-hook 'lisp-mode-hook 'rainbow-delimiters-mode)
+            )
+  )
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Smart tab mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;(use-package smart-tabs-mode

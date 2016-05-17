@@ -15,6 +15,8 @@
 ;; with this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 
+(require 'cl-lib)
+(require 'color)
 (require 'cl)
 
 (dolist (theme-file (directory-files (~get-cfg "themes/")))
@@ -223,6 +225,14 @@
 
 
 
+;;
+;; Rainbow delimiters
+;;
+(cl-loop
+ for index from 1 to rainbow-delimiters-max-face-count
+ do
+ (let ((face (intern (format "rainbow-delimiters-depth-%d-face" index))))
+   (cl-callf color-saturate-name (face-foreground face) 30)))
 
 ;;
 ;; Change height mini-buffer
