@@ -108,8 +108,9 @@
      
 
      ;; Parenthesis matching (built-in)
-     ;;(set-face-foreground 'show-paren-match (face-foreground 'default))
-     ;;(set-face-attribute 'show-paren-match nil :weight 'bold)
+     ;; (set-face-foreground 'show-paren-match (face-foreground 'default))
+     ;; (set-face-attribute 'show-paren-match nil :weight 'bold)
+     (highlight ((t (:background "#101112"))))
      (show-paren-match ((t (:foreground "#858D8A" :underline (:color "#4F99D3" :style line)))))
      (show-paren-mismatch ((t (:foreground "#858D8A" :underline (:color "#CE4045" :style line)))))
 
