@@ -201,4 +201,15 @@ about what flexible matching means in this context."
 (add-hook 'after-save-hook 'make-executable-on-save)
 
 
+;;
+;; 
+;;
+(defun ~auto-load-mode (filetypes mode)
+  "Autoload mode for filetype regex or a list of filetypes."
+  (if (stringp filetypes)
+      (add-to-list 'auto-mode-alist (cons filetypes mode))
+    (dolist (filetype filetypes)
+      (add-to-list 'auto-mode-alist (cons filetype mode)))))
+
+
 (provide 'e:funcs)
