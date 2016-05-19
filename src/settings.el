@@ -38,6 +38,12 @@
 ;; Set tab width
 (setq tab-width 4)
 
+;; Alias yes-or-no to y-or-n
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+;; Disabled initial scratch messages
+(setq initial-scratch-message nil)
+
 ;; Setup backup file
 (setq backup-directory-alist `(("." . "~/.saves")))
 (setq backup-by-copying t)
@@ -69,9 +75,10 @@
 ;;
 ;; Config nyan-mode
 ;;
-(require 'nyan-mode)
-(nyan-mode 1)
-(nyan-start-animation)
-(setq nyan-wavy-trail t)
+
+;; (require 'nyan-mode)
+;; (nyan-mode 1)
+;; (nyan-start-animation)
+;; (setq nyan-wavy-trail t)
 
 (provide 'e:settings)

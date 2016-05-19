@@ -26,8 +26,10 @@
 (color-theme-seti)
 
 ;; (color-theme-custom)
-;; (load-theme 'afternoon t)
 
+
+
+;; (load-theme 'afternoon t)
 ;;
 ;; Cycle themes
 ;;
@@ -220,7 +222,7 @@
    (global-mode-string global-mode-string)
    "    "
    ;; nyan-mode uses nyan cat as an alternative to %p
-   (:eval (when nyan-mode (list (nyan-create))))
+   ;; (:eval (when nyan-mode (list (nyan-create))))
    ))
 
 
