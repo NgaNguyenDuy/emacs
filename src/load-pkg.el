@@ -142,12 +142,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Markdown
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 (use-package markdown-mode
   :ensure markdown-mode
   :commands markdown-mode
   :init (progn
-          (~auto-load-mode '("\\.md$" "\\.markdown$") 'markdown-mode))
+          (auto-load-mode '("\\.md$" "\\.markdown$" "\\.text$") 'markdown-mode))
   :config (progn
             (use-package markdown-mode+
               :ensure markdown-mode+)
@@ -160,6 +159,29 @@
              ;; '(markdown-header-face-2 ((t (:inherit markdown-header-face :height 1.5 :background "green"))))
              ;; '(markdown-header-face-3 ((t (:inherit markdown-header-face :height 1.3))))
              )))
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Popup window manager
+;; https://github.com/m2ym/popwin-el
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package popwin
+  :ensure popwin
+  :config (progn
+            (popwin-mode 1)
+            (global-set-key (kbd "C-x p") popwin:keymap)
+            
+            ;; M-x dired-jump-other-window
+            (push '(dired-mode :position bottom) popwin:special-display-config)
+
+            (push '("*magit-edit-log*" :height 0.3) popwin:special-display-config)
+            (push '("magit" :regexp t :height 0.3) popwin:special-display-config)
+            ))
+
+
+;; (require 'conf-popwin
+;;          (load-f "conf-popwin.el"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Smart tab mode
