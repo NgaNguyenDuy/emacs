@@ -9,7 +9,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package magit
   :ensure magit
-  :commands (magit-status))
+  :commands (magit-status)
+  )
 
 ;;
 ;; Alchemist: Tooling interaction with Elixir
@@ -175,13 +176,20 @@
             ;; M-x dired-jump-other-window
             (push '(dired-mode :position bottom) popwin:special-display-config)
 
-            (push '("*magit-edit-log*" :height 0.3) popwin:special-display-config)
             (push '("magit" :regexp t :height 0.3) popwin:special-display-config)
+            (push '("alchemist" :regexp t :height 20 :stick t) popwin:special-display-config)
             ))
 
 
-;; (require 'conf-popwin
-;;          (load-f "conf-popwin.el"))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Uniquify
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'uniquify)
+(setq 
+ uniquify-buffer-name-style 'reverse
+ uniquify-separator ":"
+ uniquify-ignore-buffers-re "^\\*")
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Smart tab mode
