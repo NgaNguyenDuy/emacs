@@ -40,7 +40,7 @@
       (setq cursor-type normal-cursor-type))))
     )
   
-(add-hook 'post-command-hook 'set-cursor-according-to-mode)
+
 
 
 ;;
@@ -198,18 +198,21 @@ about what flexible matching means in this context."
     ;; looks better.
     (message (concat "Wrote " (buffer-file-name)))))
 
-(add-hook 'after-save-hook 'make-executable-on-save)
-
 
 ;;
 ;; 
 ;;
-(defun ~auto-load-mode (filetypes mode)
+(defun auto-load-mode (filetypes mode)
   "Autoload mode for filetype regex or a list of filetypes."
   (if (stringp filetypes)
       (add-to-list 'auto-mode-alist (cons filetypes mode))
     (dolist (filetype filetypes)
       (add-to-list 'auto-mode-alist (cons filetype mode)))))
+
+
+;;
+;; Window functional helper
+;;
 
 
 (provide 'e:funcs)
