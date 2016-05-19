@@ -42,6 +42,8 @@
   :init (progn
           (setq-default save-place t)))
 
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Auto-pairing brackets
 ;; https://github.com/Fuco1/smartparens/wiki/Permissions
@@ -50,14 +52,22 @@
   :ensure smartparens
   :config (progn
             (smartparens-global-mode)
-            ;; C and c++ should use RET to open block
-            (sp-local-pair 'c++-mode "{" nil :post-handlers '(("||\n[i]" "RET")))
-            (sp-local-pair 'c-mode "{" nil :post-handlers '(("||\n[i]" "RET")))
-            ;; Should autopair with <> in string
-            (sp-local-pair 'emacs-lisp-mode "<" ">" :when '(sp-in-string-p))
-            ;; Custom smartparens in exlixr mode
-            (sp-local-pair 'elixir-mode "do" "end" :post-handlers '(:add my-open-block-without-ret))
-            (sp-local-pair 'elixir-mode "fn" "end" :post-handlers '(:add "| "))
+            (require 'smartparens-elixir
+                     (load-f "libs/smartparens-elixir"))
+            (require 'smartparens-markdown
+                     (load-f "libs/smartparens-markdown"))
+            (require 'smartparens-cpp
+                     (load-f "libs/smartparens-cpp"))
+            (require 'smartparens-keybinding
+                     (load-f "libs/smartparens-keybinding"))
+            ;; ;; C and c++ should use RET to open block
+            ;; (sp-local-pair 'c++-mode "{" nil :post-handlers '(:add my-open-block-without-ret))
+            ;; (sp-local-pair 'c-mode "{" nil :post-handlers '(("||\n[i]" "RET")))
+            ;; ;; Should autopair with <> in string
+            ;; (sp-local-pair 'emacs-lisp-mode "<" ">" :when '(sp-in-string-p))
+            ;; ;; Custom smartparens in exlixr mode
+            ;; ;; (sp-local-pair 'elixir-mode "do" "end" :post-handlers '(:add my-open-block-without-ret))
+            ;; (sp-local-pair 'elixir-mode "fn" "end" :post-handlers '(:add "| "))
             ))
 
 
@@ -128,6 +138,28 @@
             )
   )
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Markdown
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package markdown-mode
+  :ensure markdown-mode
+  :commands markdown-mode
+  :init (progn
+          (~auto-load-mode '("\\.md$" "\\.markdown$") 'markdown-mode))
+  :config (progn
+            (use-package markdown-mode+
+              :ensure markdown-mode+)
+
+            (add-hook 'markdown-mode-hook 'auto-fill-mode)
+            (custom-set-faces
+             ;; ;; Your init file should contain only one such instance.
+             ;; ;; If there is more than one, they won't work right.
+             ;; '(markdown-header-face-1 ((t (:inherit markdown-header-face :height 1.7 :background "#ABCDEF"))))
+             ;; '(markdown-header-face-2 ((t (:inherit markdown-header-face :height 1.5 :background "green"))))
+             ;; '(markdown-header-face-3 ((t (:inherit markdown-header-face :height 1.3))))
+             )))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Smart tab mode
