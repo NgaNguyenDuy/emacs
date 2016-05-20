@@ -123,6 +123,25 @@
      (left-margin ((t (nil))))
      (hl-line ((t (:background "#101112"))))
 
+
+     ;; Web mode style
+     ;; HTML
+     (web-mode-doctype-face ((t (:foreground "#82AE46"))))
+     (web-mode-html-tag-face ((t (:foreground "#E6B422" :weight bold))))
+     (web-mode-html-attr-name-face ((t (:foreground "#C97586"))))
+     (web-mode-html-attr-value-face ((t (:foreground "#82AE46"))))
+
+     ;; Code
+     (web-mode-comment-face ((t (:foreground "#41535B"))))
+     ;; (web-mode-server-comment-face ((t (:foreground "#D9333F"))))
+     
+     ;; Css in web-mode
+     ;; (web-mode-css-selector-face ((t (:foreground "red"))))
+     ;; (web-mode-css-string-face ((t (:foreground "blue"))))
+     (web-mode-css-rule-face ((t (:foreground "Pink3"))))
+     (web-mode-css-pseudo-class-face ((t (:foreground "#FF7F00"))))
+     (web-mode-css-at-rule-face ((t (:foreground "#FF7F00"))))
+
      )))
 
 
