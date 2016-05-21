@@ -251,6 +251,23 @@ about what flexible matching means in this context."
         ))
     (set-window-dedicated-p window (not dedicated?))))
 
+
+;;
+;; Popup notification
+;; http://emacs-fu.blogspot.ae/2009/11/showing-pop-ups.html
+;;
+(defun djcb-popup (title msg)
+  "Show a popup if we're on X, or echo it otherwise; TITLE is the title
+of the message, MSG is the context."
+  (interactive)
+  (if (eq window-system 'x)
+      (shell-command (concat "notify-send "
+                             " '" title "' '" msg "'"))
+    ;; text only version
+    (message (concat title ": " msg))))
+
+;; (djcb-popup "Wanderlust" "You have new mail!")
+
 ;;
 ;; Xah functions utilities
 ;; http://ergoemacs.org/emacs/elisp_close_buffer_open_last_closed.html
