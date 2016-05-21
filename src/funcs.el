@@ -212,7 +212,34 @@ about what flexible matching means in this context."
 
 ;;
 ;; Window functional helper
+;; Thank to cmpitg: https://github.com/cmpitg/emacs-cmpitg
 ;;
+(defun ~delete-window ()
+  "Delete current window if it's not sticky/dedicated. Use
+prefix arg (`C-u') to force deletion if it is."
+  (interactive)
+  (or (and (not current-prefix-arg)
+           (window-dedicated-p (selected-window))
+           (message "Window '%s' is sticky/dedicated, should you want to 
+delete, re-invoke the command with C-u prefix."
+                    (current-buffer)))
+      (delete-window (selected-window))))
 
+(defun make-buffer-sticky ()
+  "Make the current window always display this buffer."
+  (interactive)
+  (let* ((window (get-buffer-window (current-buffer)))
+         (dedicated? (window-dedicated-p window)))
+    (if (not dedicated?)
+        (progn
+          (face-remap-add-relative 'mode-line-sticky-face
+                                   '(:foreground "#8BE03C"))
+          (message "Window '%s' is sticky now" (current-buffer))
+          )
+      (progn
+        (face-remap-add-relative 'mode-line '(:background "#0D1011"))
+        (message "window '%s' is normal" (current-buffer))
+        ))
+    (set-window-dedicated-p window (not dedicated?))))
 
 (provide 'e:funcs)

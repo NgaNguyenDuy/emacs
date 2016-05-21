@@ -25,6 +25,7 @@
 (bind-key "<f3>" 'helm-find-files)
 (bind-key "C-<f4>" 'kill-buffer)
 (bind-key "<f8>" 'helm-buffers-list)
+(bind-key "C-c s" 'make-buffer-sticky)
 ;; (bind-key "<f12>" 'helm-M-x)
 
 

@@ -185,9 +185,16 @@
 (setq-default
  mode-line-format
  '(
+   ;; Sticked mode line
+   (:eval
+    (let* ((window (get-buffer-window (current-buffer)))
+           (sticky? (window-dedicated-p window)))
+      (cond (sticky?
+             (propertize "  ⚡" 'face 'mode-line-sticky-face))
+            (t ""))))
    ;; Position, including warning for 78 columns
-   (:propertize "%4l:" face mode-line-position-face)
-   (:eval (propertize "%3c" 'face
+   (:propertize "%4l :" face mode-line-position-face)
+   (:eval (propertize "%3c " 'face
                       (if (> (current-column) 78)
                           'mode-line-78col-face
                         'mode-line-position-face)))
