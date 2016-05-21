@@ -98,18 +98,6 @@
             (define-key emacs-lisp-mode-map (kbd "C-c C-r") 'eval-region)
             (define-key emacs-lisp-mode-map (kbd "C-c C-b") 'eval-buffer)))
 
-(add-hook 'js-mode-hook
-          (lambda ()
-            (hs-minor-mode t)
-            (local-set-key (kbd "C-c <right>") 'hs-show-block)
-            (local-set-key (kbd "C-c <left>")  'hs-hide-block)
-            (local-set-key (kbd "C-c <up>")    'hs-hide-all)
-            (local-set-key (kbd "C-c <down>")  'hs-show-all)
-            ))
-
-
-
-
 ;; Others
 (bind-key "s-=" 'er/expand-region)
 (bind-key "M-/" 'hippie-expand)
