@@ -104,7 +104,8 @@
   :commands (helm-find-files helm-buffers-list)
   :init (use-package helm
           :config (progn
-                    (helm-autoresize-mode 1)))
+                    (helm-autoresize-mode 1)
+                    ))
   )
 
 

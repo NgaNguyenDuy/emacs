@@ -20,17 +20,19 @@
 ;; Buffer
 ;;
 (bind-key "<f2>" 'save-buffer)
-(bind-key "C-<f2>" 'buffer-menu)
 (bind-key "M-<f2>" 'rename-file-and-buffer)
 (bind-key "<f3>" 'helm-find-files)
-(bind-key "C-<f4>" 'kill-buffer)
+(bind-key "M-<f4>" 'xah-close-current-buffer)
+(bind-key "M-S-<f4>" 'xah-open-last-closed)
 (bind-key "<f8>" 'helm-buffers-list)
-(bind-key "C-c s" 'make-buffer-sticky)
+(bind-key "C-<f8>" 'xah-open-recently-closed)
 ;; (bind-key "<f12>" 'helm-M-x)
 
 
-
-
+;;
+;; Magit
+;;
+(bind-key "C-c g" 'magit-status)
 
 ;;
 ;; Helm keymapping
@@ -49,13 +51,13 @@
 (define-key helm-swoop-map (kbd "M-i") 'helm-multi-swoop-all-from-helm-swoop)
 
 ;;
-;; window navigate
+;; window binding
 ;;
 (bind-key "<M-S-left>" 'windmove-left)
 (bind-key "<M-S-right>" 'windmove-right)
 (bind-key "<M-S-up>" 'windmove-up)
 (bind-key "<M-S-down>" 'windmove-down)
-
+(bind-key "C-c s" 'make-window-sticky)
 
 ;;
 ;; company mode
