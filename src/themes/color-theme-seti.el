@@ -26,6 +26,7 @@
 (make-face 'mode-line-minor-mode-face)
 (make-face 'mode-line-process-face)
 (make-face 'mode-line-78col-face)
+(make-face 'mode-line-sticky-face)
 
 (defun color-theme-seti ()
   "Color theme Seti - Dark theme ispired by Atom Seti."
@@ -65,7 +66,7 @@
      (mode-line-mode-face ((t (:foreground "gray80" :inherit (mode-line-face)))))
      (mode-line-minor-mode-face ((t (:foreground "gray40" :height 110 :inherit (mode-line-mode-face)))))
      (mode-line-process-face ((t (:foreground "#718c00" :inherit (mode-line-face)))))
-     (mode-line-78col-face ((t (:foreground "black" :background "#eab700" :inherit (mode-line-position-face)))))
+     (mode-line-78col-face ((t (:foreground "#c82829" :inherit (mode-line-position-face) ))))
      ;; (mode-line-buffer-id ((t (:weight bold :foreground "#DCCD69"))))
      ;; (mode-line-emphasis ((t (:weight bold))))
      ;; (mode-line-highlight ((t (:box (:line-width 3 :color "#4F99D3")))))
@@ -119,7 +120,7 @@
 
      ;; Lines
      (linum ((t (:foreground "#2F3C42"  :weight light :height 0.9))))
-     (fringe ((t (:background "#0D1011" :foreground "#2F3C42"))))
+     (fringe ((t (:background "#151718" :foreground "#101112"))))
      (left-margin ((t (nil))))
      (hl-line ((t (:background "#101112"))))
 
