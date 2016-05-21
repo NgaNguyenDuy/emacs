@@ -209,6 +209,25 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Better ido
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package ido
+  :ensure ido
+  :config (progn
+            (ido-mode 1)
+            (ido-everywhere 1)
+            (use-package flx-ido
+              :config (progn
+                        (flx-ido-mode 1)
+
+                        ;; disable ido faces to see flx highlights.
+                        (setq ido-use-faces nil)))
+            (use-package ido-vertical-mode
+              :ensure ido-vertical-mode
+              :config (ido-vertical-mode 1))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Smart tab mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;(use-package smart-tabs-mode

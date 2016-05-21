@@ -333,7 +333,8 @@ Else it is a user buffer."
   "Open recently closed file."
   (interactive)
   (find-file (ido-completing-read
-              "Open:" (mapcar (lambda (f) (cdr f)) xah-recently-closed-buffers))))
+              "Open:" (mapcar (lambda (f)
+                                (cdr f)) xah-recently-closed-buffers))))
 
 
 (provide 'e:funcs)
