@@ -230,8 +230,7 @@ about what flexible matching means in this context."
   (interactive)
   (or (and (not current-prefix-arg)
            (window-dedicated-p (selected-window))
-           (message "Window '%s' is sticky/dedicated, should you want to 
-delete, re-invoke the command with C-u prefix."
+           (message "Window '%s' is sticky/dedicated, should you want to delete, re-invoke the command with C-u prefix."
                     (current-buffer)))
       (delete-window (selected-window))))
 
