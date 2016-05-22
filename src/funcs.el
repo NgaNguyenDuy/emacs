@@ -352,5 +352,52 @@ Else it is a user buffer."
               "Open:" (mapcar (lambda (f)
                                 (cdr f)) xah-recently-closed-buffers))))
 
+;; Create new buffer at ~/tmp by default
+(defun ~new-empty-buffer ()
+  "Open a new empty buffer. Thanks Xah Lee for this function.
+Reference: http://ergoemacs.org/emacs/emacs_new_empty_buffer.html"
+  (interactive)
+  (let ((buf (generate-new-buffer "untitled")))
+    (switch-to-buffer buf)
+    (funcall (and initial-major-mode))
+    (setq default-directory "/home/tspyimt/tmp")
+    (setq buffer-offer-save t)))
+
+
+;; Toggle letter case
+(defun xah-toggle-letter-case ()
+  "Toggle the letter case of current word or text selection.
+Always cycle in this order: Init Caps, ALL CAPS, all lower.
+
+URL `http://ergoemacs.org/emacs/modernization_upcase-word.html'
+Version 2016-01-08"
+  (interactive)
+  (let (
+        (deactivate-mark nil)
+        ξp1 ξp2)
+    (if (use-region-p)
+        (setq ξp1 (region-beginning)
+              ξp2 (region-end))
+      (save-excursion
+        (skip-chars-backward "[:alnum:]")
+        (setq ξp1 (point))
+        (skip-chars-forward "[:alnum:]")
+        (setq ξp2 (point))))
+    (when (not (eq last-command this-command))
+      (put this-command 'state 0))
+    (cond
+     ((equal 0 (get this-command 'state))
+      (upcase-initials-region ξp1 ξp2)
+      (put this-command 'state 1))
+     ((equal 1  (get this-command 'state))
+      (upcase-region ξp1 ξp2)
+      (put this-command 'state 2))
+     ((equal 2 (get this-command 'state))
+      (downcase-region ξp1 ξp2)
+      (put this-command 'state 0)))))
+
+
+
+;; (defalias 'qrr 'query-replace-Regexp)
 
 (provide 'e:funcs)
