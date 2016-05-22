@@ -178,7 +178,8 @@
             (push '(dired-mode :position bottom) popwin:special-display-config)
 
             (push '("magit" :regexp t :height 0.3) popwin:special-display-config)
-            (push '("alchemist" :regexp t :height 20 :stick t) popwin:special-display-config)
+            ;; (push '("alchemist" :regexp t :height 20 :stick t) popwin:special-display-config)
+            (push '("*Alchemist-IEx*" :position bottom) popwin:special-display-config)
             ))
 
 
