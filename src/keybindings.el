@@ -104,6 +104,7 @@
 (bind-key "s-=" 'er/expand-region)
 (bind-key "M-/" 'hippie-expand)
 (bind-key "M-x" 'smex)
+(bind-key "s--" 'comment-or-uncomment-region)
 
 
 (provide 'e:keybindings)
