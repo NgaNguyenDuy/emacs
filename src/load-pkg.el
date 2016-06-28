@@ -252,6 +252,17 @@
             (add-hook 'lisp-interaction-mode-hook  'turn-on-eldoc-mode)
             (add-hook 'ielm-mode-hook              'turn-on-eldoc-mode)))
 
+
+;;
+;; Erlang configuration
+;;
+(setq load-path
+      (cons  "/home/tspyimt/.bin/erlang/otp_7.3/lib/erlang/lib/tools-2.8.3/emacs"
+             load-path))
+(setq erlang-root-dir "/home/tspyimt/.bin/erlang/otp_7.3")
+(setq exec-path (cons "/home/tspyimt/.bin/erlang/otp_7.3/bin" exec-path))
+(require 'erlang-start)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Smart tab mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
