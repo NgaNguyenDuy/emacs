@@ -100,6 +100,12 @@
             (define-key emacs-lisp-mode-map (kbd "C-c C-r") 'eval-region)
             (define-key emacs-lisp-mode-map (kbd "C-c C-b") 'eval-buffer)))
 
+;; Css mode
+(add-hook 'css-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-c m") 'xah-css-compact-css-region)))
+
+
 ;; Others
 (bind-key "s-=" 'er/expand-region)
 (bind-key "M-/" 'hippie-expand)

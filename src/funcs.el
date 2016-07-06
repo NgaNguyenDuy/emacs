@@ -398,6 +398,40 @@ Version 2016-01-08"
 
 
 
+
+;;
+;; Remove unnecessary whitespace of css
+;; Thank xah-lee for this functional
+;;
+(require 'xah-replace-pairs (load-f "xah-replace-pairs.el"))
+(defun xah-css-compact-css-region (φbegin φend)
+  "Remove unnecessary whitespaces of CSS source code in region.
+WARNING: not robust.
+URL `http://ergoemacs.org/emacs/elisp_css_compressor.html'
+Version 2015-04-29"
+  (interactive "r")
+  (save-restriction
+    (narrow-to-region φbegin φend)
+    (xah-replace-regexp-pairs-region
+     (point-min)
+     (point-max)
+     '(["  +" " "]))
+    (xah-replace-pairs-region
+     (point-min)
+     (point-max)
+     '(
+       ["\n" ""]
+       [" /* " "/*"]
+       [" */ " "*/"]
+       [" {" "{"]
+       ["{ " "{"]
+       ["; " ";"]
+       [": " ":"]
+       [";}" "}"]
+       ["}" "}\n"]
+       ))))
+
+
 ;; (defalias 'qrr 'query-replace-Regexp)
 
 (provide 'e:funcs)
