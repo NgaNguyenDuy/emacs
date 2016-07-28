@@ -294,6 +294,12 @@
 
 
 
+(add-to-list 'load-path "~/src/emacs/src/local-pkgs/logito")
+(require 'logito)
+
+(use-package gist
+  :ensure gist)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Smart tab mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
