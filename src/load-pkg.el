@@ -52,7 +52,7 @@
 (use-package smartparens-config
   :ensure smartparens
   :config (progn
-            (smartparens-global-mode)
+            ;; (smartparens-global-mode)
             (require 'smartparens-elixir
                      (load-f "libs/smartparens-elixir"))
             (require 'smartparens-markdown
@@ -61,6 +61,7 @@
                      (load-f "libs/smartparens-cpp"))
             (require 'smartparens-keybinding
                      (load-f "libs/smartparens-keybinding"))
+            (add-hook 'elisp-mode-hook #'smartparens-mode)
             ;; ;; C and c++ should use RET to open block
             ;; (sp-local-pair 'c++-mode "{" nil :post-handlers '(:add my-open-block-without-ret))
             ;; (sp-local-pair 'c-mode "{" nil :post-handlers '(("||\n[i]" "RET")))
@@ -271,7 +272,6 @@
 (setq exec-path (cons "/usr/bin/erl" exec-path))
 (require 'erlang-start)
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; URL shortener
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -299,7 +299,9 @@
             (add-hook 'racket-repl-mode-hook 'company-mode)))
 
 
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Gist mode
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package gist
   :ensure gist)
 
@@ -337,6 +339,5 @@
             ;; TRIANGLE 「▷」, 187 is »
             ))
     ))
-
 
 (provide 'e:load-pkg)
