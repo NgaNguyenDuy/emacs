@@ -10,11 +10,15 @@
 
 ;; This file is not part of GNU Emacs.
 
-;; You can redistribute this program and/or modify it under the terms of the GNU General Public License version 2.
+;; You can redistribute this program and/or modify it under the terms of the
+;; GNU General Public License version 2.
+
 
 ;;; Commentary:
 
-;; This package provides elisp functions that do find/replace with multiple pairs of strings. and guarantees that earlier find/replace pair does not effect later find/replace pairs.
+;; This package provides elisp functions that do find/replace with multiple
+;; pairs of strings. and guarantees that earlier find/replace pair does not
+;; effect later find/replace pairs.
 
 ;; The functions are:
 
@@ -49,19 +53,27 @@
  [[findStr1 replaceStr1] [findStr2 replaceStr2] …]
 It can be list or vector, for the elements or the entire argument.
 
-Find strings case sensitivity depends on `case-fold-search'. You can set it locally, like this: (let ((case-fold-search nil)) …)
+Find strings case sensitivity depends on `case-fold-search'. You can set it
+locally, like this: (let ((case-fold-search nil)) …)
 
 The replacement are literal and case sensitive.
 
-Once a subsring in the buffer is replaced, that part will not change again.  For example, if the buffer content is “abcd”, and the φpairs are a → c and c → d, then, result is “cbdd”, not “dbdd”.
+Once a subsring in the buffer is replaced, that part will not change again.
+For example, if the buffer content is “abcd”, and the φpairs are a → c and c →
+d, then, result is “cbdd”, not “dbdd”.
 
-Note: the region's text or any string in ΦPAIRS is assumed to NOT contain any character from Unicode Private Use Area A. That is, U+F0000 to U+FFFFD. And, there are no more than 65534 pairs."
+
+Note: the region's text or any string in ΦPAIRS is assumed to NOT contain any
+character from Unicode Private Use Area A. That is, U+F0000 to U+FFFFD. And,
+there are no more than 65534 pairs."
+  
   (let (
         (ξunicodePriveUseA #xf0000)
         (ξi 0)
         (ξtempMapPoints '()))
     (progn
-      ;; generate a list of Unicode chars for intermediate replacement. These chars are in  Private Use Area.
+      ;; generate a list of Unicode chars for intermediate replacement. These
+      ;; chars are in  Private Use Area.
       (setq ξi 0)
       (while (< ξi (length φpairs))
         (push (char-to-string (+ ξunicodePriveUseA ξi)) ξtempMapPoints)
@@ -95,7 +107,11 @@ This function is a wrapper of `xah-replace-pairs-region'. See there for detail."
     (xah-replace-pairs-region 1 (point-max) φpairs)
     (buffer-string)))
 
-(defun xah-replace-regexp-pairs-region (φbegin φend φpairs &optional φfixedcase-p φliteral-p)
+(defun xah-replace-regexp-pairs-region (
+                                        φbegin φend φpairs &optional
+                                               φfixedcase-p φliteral-p)
+  
+  
   "Replace regex string find/replace ΦPAIRS in region.
 
 ΦBEGIN ΦEND are the region boundaries.
@@ -104,9 +120,13 @@ This function is a wrapper of `xah-replace-pairs-region'. See there for detail."
  [[regexStr1 replaceStr1] [regexStr2 replaceStr2] …]
 It can be list or vector, for the elements or the entire argument.
 
-The optional arguments ΦFIXEDCASE-P and ΦLITERAL-P is the same as in `replace-match'.
+The optional arguments ΦFIXEDCASE-P and ΦLITERAL-P is the same as in
+`replace-match'.
 
-Find strings case sensitivity depends on `case-fold-search'. You can set it locally, like this: (let ((case-fold-search nil)) …)"
+
+Find strings case sensitivity depends on `case-fold-search'. You can set it
+locally, like this: (let ((case-fold-search nil)) …)"
+  
   (save-restriction
     (narrow-to-region φbegin φend)
     (mapc
@@ -116,16 +136,24 @@ Find strings case sensitivity depends on `case-fold-search'. You can set it loca
          (replace-match (elt ξx 1) φfixedcase-p φliteral-p)))
      φpairs)))
 
-(defun xah-replace-regexp-pairs-in-string (φstr φpairs &optional φfixedcase-p φliteral-p)
-  "Replace string ΦSTR recursively by regex find/replace pairs ΦPAIRS sequence.
+(defun xah-replace-regexp-pairs-in-string (φstr φpairs &optional φfixedcase-p
+                                                φliteral-p)
+  
+  "Replace string ΦSTR recursively by regex find/replace pairs ΦPAIRS
+  sequence.
 
-This function is a wrapper of `xah-replace-regexp-pairs-region'. See there for detail.
+
+This function is a wrapper of `xah-replace-regexp-pairs-region'. See there for
+detail.
+
 
 See also `xah-replace-pairs-in-string'."
   (with-temp-buffer
     (insert φstr)
     (goto-char (point-min))
-    (xah-replace-regexp-pairs-region (point-min) (point-max) φpairs φfixedcase-p φliteral-p)
+    (xah-replace-regexp-pairs-region (point-min) (point-max) φpairs
+                                     φfixedcase-p φliteral-p)
+    
     (buffer-string)))
 
 (defun xah-replace-pairs-region-recursive (φbegin φend φpairs)
@@ -153,7 +181,9 @@ The replacement are literal and case sensitive."
 (defun xah-replace-pairs-in-string-recursive (φstr φpairs)
   "Replace string ΦSTR recursively by find/replace pairs ΦPAIRS sequence.
 
-This function is is a wrapper of `xah-replace-pairs-region-recursive'. See there for detail."
+This function is is a wrapper of `xah-replace-pairs-region-recursive'. See
+there for detail."
+  
   (with-temp-buffer
     (insert φstr)
     (goto-char (point-min))

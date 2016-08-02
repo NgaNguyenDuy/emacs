@@ -73,8 +73,6 @@
 
 
 
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Multiple cursors
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -148,7 +146,8 @@
   :ensure markdown-mode
   :commands markdown-mode
   :init (progn
-          (auto-load-mode '("\\.md$" "\\.markdown$" "\\.text$") 'markdown-mode))
+          (auto-load-mode '("\\.md$" "\\.markdown$" "\\.text$")
+                          'markdown-mode)) 
   :config (progn
             (use-package markdown-mode+
               :ensure markdown-mode+)
@@ -157,9 +156,12 @@
             (custom-set-faces
              ;; ;; Your init file should contain only one such instance.
              ;; ;; If there is more than one, they won't work right.
-             ;; '(markdown-header-face-1 ((t (:inherit markdown-header-face :height 1.7 :background "#ABCDEF"))))
-             ;; '(markdown-header-face-2 ((t (:inherit markdown-header-face :height 1.5 :background "green"))))
-             ;; '(markdown-header-face-3 ((t (:inherit markdown-header-face :height 1.3))))
+             ;; '(markdown-header-face-1 ((t (:inherit markdown-header-face
+             ;; :height 1.7 :background "#ABCDEF")))) 
+             ;; '(markdown-header-face-2 ((t (:inherit markdown-header-face
+             ;; :height 1.5 :background "green")))) 
+             ;; '(markdown-header-face-3 ((t (:inherit markdown-header-face
+             ;; :height 1.3)))) 
              )))
 
 
@@ -177,9 +179,13 @@
             ;; M-x dired-jump-other-window
             (push '(dired-mode :position bottom) popwin:special-display-config)
 
-            (push '("magit" :regexp t :height 0.3) popwin:special-display-config)
-            ;; (push '("alchemist" :regexp t :height 20 :stick t) popwin:special-display-config)
-            (push '("*Alchemist-IEx*" :position bottom) popwin:special-display-config)
+            (push '("magit" :regexp t :height 0.3)
+            popwin:special-display-config)
+            ;; (push '("alchemist" :regexp t :height 20 :stick t)
+            ;; popwin:special-display-config) 
+            (push '(
+                    "*Alchemist-IEx*" :position bottom)
+                  popwin:special-display-config)
             ))
 
 
@@ -297,24 +303,40 @@
 (use-package gist
   :ensure gist)
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Smart tab mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;(use-package smart-tabs-mode
-;;   :ensure smart-tabs-mode)
+(use-package smart-tabs-mode
+  :ensure smart-tabs-mode)
+
+
 
 ;; Todo later
 ;; Ref: http://ergoemacs.org/emacs/whitespace-mode.html
-;; (use-package whitespace
-;;   :commands whitespace-mode)
-;; (setq whitespace-style (quote (spaces tabs newline space-mark tab-mark newline-mark)))
-;; (setq whitespace-display-mappings
-;;       ;; all numbers are Unicode codepoint in decimal. try (insert-char 182 ) to see it
-;;       '(
-;;         (space-mark 32 [32] [46]) ; 32 SPACE, 183 MIDDLE DOT 「·」, 46 FULL STOP 「.」
-;;         (newline-mark 10 [8617 10]) ; 10 LINE FEED
-;;         (tab-mark 9 [187 9] [92 9]) ; 9 TAB, 9655 WHITE RIGHT-POINTING TRIANGLE 「▷」
-;;         ))
+;; Documentation: https://www.emacswiki.org/emacs/WhiteSpace
+(use-package whitespace
+  :ensure whitespace
+  :commands whitespace-mode
+  :config
+  (progn
+    (setq whitespace-style
+          (quote
+           (face space-mark tab-mark newline-mark lines-tail)
+           ))
+    (setq whitespace-line-column 78)
+    (setq whitespace-display-mappings
+          ;; all numbers are Unicode codepoint in decimal.try (insert-char
+          ;; 182) to see it
+          '(
+            (space-mark 32 [183] [46]) ;; 32 SPACE, 183 MIDDLE DOT 「·」, 46
+            ;; FULL STOP「.」
+            (newline-mark 10 [172 10]) ;; 10 LINE FEED, 9166 is ⏎, 8629 is ↵,
+            ;; 172 is ¬
+            (tab-mark 9 [187 9] [92 9]) ; 9 TAB, 9655 WHITE RIGHT-POINTING
+            ;; TRIANGLE 「▷」, 187 is »
+            ))
+    ))
 
 
 (provide 'e:load-pkg)

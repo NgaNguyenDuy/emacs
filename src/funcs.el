@@ -543,7 +543,6 @@ This command works on `sudo` *nixes only."
                    path)))))))
 
 
-
 ;; (defalias 'qrr 'query-replace-Regexp)
 
 (provide 'e:funcs)

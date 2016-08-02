@@ -159,25 +159,14 @@
                          :underline nil
                          :slant normal
                          :weight normal
-                         :height 135
+                         :height 140
                          :width normal
                          :foundry "unknown"
                          :family "Inconsolata"))))
- ;; '(mode-line ((t (:background "grey75"
- ;;                              :foreground "#3d3d3d"
- ;;                              :inverse-video t
- ;;                              :box (:line-width 1 :color "#6160B4" :style released-button)
- ;;                              :slant normal
- ;;                              :weight normal
- ;;                              :height 100
- ;;                              :family "Geneva"))))
- ;; '(mode-line ((t (:inverse-video t
- ;;                                 :slant normal
- ;;                                 :weight normal
- ;;                                 :height 100
- ;;                                 :family "Geneva"))))
 
  '(rst-level-1-face ((t (:embolden t))) t))
+
+;; (set-frame-font "ReemKufi:pixelsize=18")
 
 ;;
 ;; Mode line setup

@@ -111,6 +111,7 @@
 (bind-key "M-/" 'hippie-expand)
 (bind-key "M-x" 'smex)
 (bind-key "s--" 'comment-or-uncomment-region)
+(bind-key "s-w" 'whitespace-mode)
 
 
 (provide 'e:keybindings)

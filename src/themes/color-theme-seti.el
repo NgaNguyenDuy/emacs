@@ -1,6 +1,7 @@
 ;; Seti - A theme inspired by Seti Atom Theme
 ;;
-;; Copyright (C) 2016 Nga Nguyen ([@nganguyenduy](https://github.com/nganguyenduy/))
+;; Copyright (C) 2016 Nga Nguyen
+;;([@nganguyenduy](https://github.com/nganguyenduy/))
 ;;
 ;; This project is free software: you can redistribute it and/or modify it
 ;; under the terms of the GNU General Public License as published by the Free
@@ -43,10 +44,14 @@
      ;; (cursor ((t (:background "#CCCCCC" :foreground "#151718"))))
      (minibuffer-prompt ((t (:foreground "#4F99D3" :weight bold))))
      (region ((t (:background "#434546"))))
-     (error ((t (:foreground "#CE4045" :weight bold :underline (:color "#CE4045" :style line)))))
+     (error ((t (:foreground "#CE4045" :weight bold :underline
+                             (:color "#CE4045" :style line)))))
 
-     (isearch ((t (:background "#151718" :foreground "#D4D7D6" :box (:line-width 1 :color "#4F99D3") :weight bold))))
-     (lazy-highlight ((t (:background "#151718" :foreground "#858D8A" :box (:line-width 1 :color "#4F99D3")))))
+     (isearch ((t (:background "#151718" :foreground "#D4D7D6" :box
+                               (:line-width 1 :color "#4F99D3") :weight bold)
+                  )))
+     (lazy-highlight ((t (:background "#151718" :foreground "#858D8A" :box
+                                      (:line-width 1 :color "#4F99D3")))))
 
      (secondary-selection ((t (:background "#1E2326"))))
      (trailing-whitespace ((t (:background "#0D1011"))))
@@ -56,17 +61,36 @@
 
 
      ;; Mode line
-     (mode-line ((t (:foreground "#D4D7D6" :background "#0D1011" :family "Righteous" :inverse-video nil :box (:line-width 6 :color "#0D1011" :style nil)))))
-     (mode-line-inactive ((t (:foreground "#D4D7D6" :background "#1E2326" :family "Righteous" :inverse-video nil :box (:line-width 6 :color "#1E2326" :style nil)))))
-     (mode-line-read-only-face ((t (:foreground "#4271ae" :inherit (mode-line-face) :box (:line-width 2 :color "#4271ae")))))
-     (mode-line-modified-face ((t (:foreground "#c82829" :background "#ffffff" :inherit (mode-line-face) :box (:line-width 2 :color "#c82829")))))
-     (mode-line-folder-face ((t (:foreground "gray60" :inherit (mode-line-face)))))
-     (mode-line-filename-face ((t (:foreground "#eab700" :inherit (mode-line-face) :weight bold))))
-     (mode-line-position-face ((t (:height 100 :inherit (mode-line-face) :family "Menlo"))))
-     (mode-line-mode-face ((t (:foreground "gray80" :inherit (mode-line-face)))))
-     (mode-line-minor-mode-face ((t (:foreground "gray40" :height 110 :inherit (mode-line-mode-face)))))
-     (mode-line-process-face ((t (:foreground "#718c00" :inherit (mode-line-face)))))
-     (mode-line-78col-face ((t (:foreground "#c82829" :inherit (mode-line-position-face) ))))
+     (mode-line ((t (:foreground "#D4D7D6" :background "#0D1011"
+                                 :family "Righteous" :inverse-video nil :box
+                                 (:line-width 6 :color "#0D1011" :style nil)))
+                 ))
+     (mode-line-inactive ((t (:foreground "#D4D7D6" :background "#1E2326"
+                                          :family "Righteous"
+                                          :inverse-video nil
+                                          :box (:line-width 6 :color "#1E2326"
+                                                            :style nil)))))
+     (mode-line-read-only-face
+      ((t (:foreground "#4271ae" :inherit (mode-line-face)
+                       :box (:line-width 2 :color "#4271ae")))))
+     (mode-line-modified-face
+      ((t (:foreground "#c82829" :background "#ffffff"
+                       :inherit (mode-line-face)
+                       :box (:line-width 2 :color "#c82829")))))
+     (mode-line-folder-face
+      ((t (:foreground "gray60" :inherit (mode-line-face)))))
+     (mode-line-filename-face
+      ((t (:foreground "#eab700" :inherit (mode-line-face) :weight bold))))
+     (mode-line-position-face
+      ((t (:height 100 :inherit (mode-line-face) :family "ReemKufi"))))
+     (mode-line-mode-face
+      ((t (:foreground "gray80" :inherit (mode-line-face)))))
+     (mode-line-minor-mode-face
+      ((t (:foreground "gray40" :height 110 :inherit (mode-line-mode-face)))))
+     (mode-line-process-face
+      ((t (:foreground "#718c00" :inherit (mode-line-face)))))
+     (mode-line-78col-face
+      ((t (:foreground "#c82829" :inherit (mode-line-position-face) ))))
      ;; (mode-line-buffer-id ((t (:weight bold :foreground "#DCCD69"))))
      ;; (mode-line-emphasis ((t (:weight bold))))
      ;; (mode-line-highlight ((t (:box (:line-width 3 :color "#4F99D3")))))
@@ -91,19 +115,25 @@
 
      ;; Dired
      (dired-directory ((t (:foreground "#D4D7D6" :weight extrabold))))
-     (dired-header ((t (:foreground "white"  :background "#55B5DB" :weight bold))))
+     (dired-header
+      ((t (:foreground "white"  :background "#55B5DB" :weight bold))))
      (dired-ignored ((t (:foreground "#41535B"))))
      (dired-flagged ((t (:foreground "#CE4045" :weight bold))))
-     (dired-marked ((t (:background "#55B5DB" :foreground "white" :weight normal))))
+     (dired-marked
+      ((t (:background "#55B5DB" :foreground "white" :weight normal))))
      (dired-perm-write ((t (:foreground "#DCCD69" :weight ultra-bold))))
      (dired-symlink ((t (:foreground "#75E5F4" :weight normal))))
      (dired-warning ((t (:inherit (font-lock-warning-face)))))
      
      ;; Company mode
-     (company-tooltip ((t (:inherit default :background "black" :foreground "lightgrey"))))
-     (company-tooltip-common-selection ((t (:foreground "#CA74F3" :background "white" :bold t))))
-     (company-tooltip-selection ((t (:foreground "black" :background "white"))))
-     (company-preview-common ((t (:foreground "lightgrey" :background nil :underline t))))
+     (company-tooltip
+      ((t (:inherit default :background "black" :foreground "lightgrey"))))
+     (company-tooltip-common-selection
+      ((t (:foreground "#CA74F3" :background "white" :bold t))))
+     (company-tooltip-selection ((t (:foreground "black"
+                                                 :background "white"))))
+     (company-preview-common ((t (:foreground "lightgrey"
+                                              :background nil :underline t))))
      (company-scrollbar-fg ((t (:background "white"))))
      (company-scrollbar-bg ((t (:background "#BABAB9"))))
      
@@ -112,8 +142,14 @@
      ;; (set-face-foreground 'show-paren-match (face-foreground 'default))
      ;; (set-face-attribute 'show-paren-match nil :weight 'bold)
      (highlight ((t (:background "#101112"))))
-     (show-paren-match ((t (:foreground "#858D8A" :underline (:color "#4F99D3" :style line)))))
-     (show-paren-mismatch ((t (:foreground "#858D8A" :underline (:color "#CE4045" :style line)))))
+     (show-paren-match ((t (:foreground "#858D8A" :underline
+                                        (:color "#4F99D3" :style line)))))
+     (show-paren-mismatch ((t (:foreground "#858D8A" :underline
+                                           (:color "#CE4045" :style line)))))
+
+
+     ;; whitespace custome face
+     (whitespace-line ((t (:background "red" :foreground "white"))))
 
 
      ;; (default ((t (:height 150 :family "Menlo"))))
