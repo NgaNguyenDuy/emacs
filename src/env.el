@@ -147,7 +147,6 @@
 
 
 
-
 ;; Custom fonts
 (custom-set-faces
  '(default ((t (:inherit nil
@@ -162,9 +161,10 @@
                          :height 140
                          :width normal
                          :foundry "unknown"
-                         :family "Inconsolata"))))
+                         :family "Source Code Pro"))))
 
  '(rst-level-1-face ((t (:embolden t))) t))
+
 
 ;; (set-frame-font "ReemKufi:pixelsize=18")
 
