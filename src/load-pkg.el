@@ -61,7 +61,6 @@
                      (load-f "libs/smartparens-cpp"))
             (require 'smartparens-keybinding
                      (load-f "libs/smartparens-keybinding"))
-            (add-hook 'elisp-mode-hook #'smartparens-mode)
             ;; ;; C and c++ should use RET to open block
             ;; (sp-local-pair 'c++-mode "{" nil :post-handlers '(:add my-open-block-without-ret))
             ;; (sp-local-pair 'c-mode "{" nil :post-handlers '(("||\n[i]" "RET")))
@@ -71,7 +70,6 @@
             ;; ;; (sp-local-pair 'elixir-mode "do" "end" :post-handlers '(:add my-open-block-without-ret))
             ;; (sp-local-pair 'elixir-mode "fn" "end" :post-handlers '(:add "| "))
             ))
-
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -234,7 +232,6 @@
               :ensure ido-vertical-mode
               :config (ido-vertical-mode 1))))
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Find file using fuzzy matching
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -246,7 +243,6 @@
             (add-to-list 'fiplr-root-markers "README.txt")
             (add-to-list 'fiplr-root-markers "README")
             ))
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Live function signature at echo area
