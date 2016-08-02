@@ -336,4 +336,14 @@
             ))
     ))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; editorconfig
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package editorconfig
+  :ensure editorconfig
+  :config
+  (progn
+    (editorconfig-mode 1)))
+
+
 (provide 'e:load-pkg)

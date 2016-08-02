@@ -158,7 +158,7 @@
                          :underline nil
                          :slant normal
                          :weight normal
-                         :height 140
+                         :height 135
                          :width normal
                          :foundry "unknown"
                          :family "Source Code Pro"))))
