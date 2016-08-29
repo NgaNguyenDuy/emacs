@@ -260,12 +260,12 @@
 ;; Erlang configuration
 ;;
 (setq load-path
-      (cons  "/usr/lib/erlang/lib/tools-2.7/emacs"
+      (cons  "~/.bin/erlang/otp_7.3/lib/erlang/lib/tools-2.8.3/emacs"
               load-path))
-(setq erlang-root-dir "/usr/lib/erlang")
-(setq exec-path (cons "/usr/lib/erlang/bin" exec-path))
-(setq erlang-man-root-dir "/usr/lib/erlang/man")
-(setq exec-path (cons "/usr/bin/erl" exec-path))
+(setq erlang-root-dir "~/.bin/erlang/otp_7.3/lib/erlang")
+(setq exec-path (cons "~/.bin/erlang/otp_7.3/lib/erlang/bin" exec-path))
+;; (setq erlang-man-root-dir "/usr/lib/erlang/man")
+(setq exec-path (cons "~/.bin/erlang/otp_7.3/lib/erlang/bin/erl" exec-path))
 (require 'erlang-start)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

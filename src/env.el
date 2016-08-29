@@ -161,7 +161,7 @@
                          :height 125
                          :width normal
                          :foundry "unknown"
-                         :family "Source Code Pro"))))
+                         :family "Menlo"))))
 
  '(rst-level-1-face ((t (:embolden t))) t))
 
