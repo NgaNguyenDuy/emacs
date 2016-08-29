@@ -82,7 +82,7 @@
      (mode-line-filename-face
       ((t (:foreground "#eab700" :inherit (mode-line-face) :weight bold))))
      (mode-line-position-face
-      ((t (:height 100 :inherit (mode-line-face) :family "ReemKufi"))))
+      ((t (:height 100 :inherit (mode-line-face) :family "Menlo"))))
      (mode-line-mode-face
       ((t (:foreground "gray80" :inherit (mode-line-face)))))
      (mode-line-minor-mode-face

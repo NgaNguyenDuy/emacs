@@ -158,10 +158,10 @@
                          :underline nil
                          :slant normal
                          :weight normal
-                         :height 140
+                         :height 125
                          :width normal
                          :foundry "unknown"
-                         :family "Inconsolata"))))
+                         :family "Source Code Pro"))))
 
  '(rst-level-1-face ((t (:embolden t))) t))
 
