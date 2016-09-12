@@ -23,23 +23,23 @@
 (defun set-cursor-according-to-mode ()
   "Change cursor color and type according to some minor modes."
   (let ((read-only-color "#CE4045")
-        (read-only-cursor-type 'hbar)
-        (overwrite-cursor-type 'box)
-        (normal-color "yellow")
-        (normal-cursor-type 'bar))
+         (read-only-cursor-type 'hbar)
+         (overwrite-cursor-type 'box)
+         (normal-color "yellow")
+         (normal-cursor-type 'bar))
 
     (cond
-     (buffer-read-only
-      (set-cursor-color read-only-color)
-      (setq cursor-type read-only-cursor-type))
-     (overwrite-mode
-      (set-cursor-color overwrite-color)
-      (setq cursor-type overwrite-cursor-type))
-     (t 
-      (set-cursor-color normal-color)
-      (setq cursor-type normal-cursor-type))))
-    )
-  
+      (buffer-read-only
+        (set-cursor-color read-only-color)
+        (setq cursor-type read-only-cursor-type))
+      (overwrite-mode
+        (set-cursor-color overwrite-color)
+        (setq cursor-type overwrite-cursor-type))
+      (t 
+        (set-cursor-color normal-color)
+        (setq cursor-type normal-cursor-type))))
+  )
+
 
 
 
@@ -59,18 +59,18 @@
 ;; filter annoying messages
 ;;
 (defvar message-filter-regexp-list '("^Starting new Ispell process \\[.+\\] \\.\\.\\.$"
-                                     "^Ispell process killed$")
+                                      "^Ispell process killed$")
   "filter formatted message string to remove noisy messages")
 (defadvice message (around message-filter-by-regexp activate)
   (if (not (ad-get-arg 0))
-      ad-do-it
+    ad-do-it
     (let ((formatted-string (apply 'format (ad-get-args 0))))
       (if (and (stringp formatted-string)
-               (some (lambda (re) (string-match re formatted-string)) message-filter-regexp-list))
-          (save-excursion
-            (set-buffer "*Messages*")
-            (goto-char (point-max))
-            (insert formatted-string "\n"))
+            (some (lambda (re) (string-match re formatted-string)) message-filter-regexp-list))
+        (save-excursion
+          (set-buffer "*Messages*")
+          (goto-char (point-max))
+          (insert formatted-string "\n"))
         (progn
           (ad-set-args 0 `("%s" ,formatted-string))
           ad-do-it)))))
@@ -82,7 +82,7 @@
 (defun shorten-directory (dir max-length)
   "Show up to `max-length' characters of a directory name `dir'."
   (let ((path (reverse (split-string (abbreviate-file-name dir) "/")))
-        (output ""))
+         (output ""))
     (when (and path (equal "" (car path)))
       (setq path (cdr path)))
     (while (and path (< (length output) (- max-length 4)))
@@ -110,20 +110,20 @@ The argument OLD has to be nil the first call of this function, and t
 for subsequent calls (for further possible completions of the same
 string).  It returns t if a new completion is found, nil otherwise."
   (if (not old)
-      (progn
-        (he-init-string (he-lisp-symbol-beg) (point))
-        (if (not (he-string-member he-search-string he-tried-table))
-            (setq he-tried-table (cons he-search-string he-tried-table)))
-        (setq he-expand-list
-              (and (not (equal he-search-string ""))
-                   (he-flexible-abbrev-collect he-search-string)))))
+    (progn
+      (he-init-string (he-lisp-symbol-beg) (point))
+      (if (not (he-string-member he-search-string he-tried-table))
+        (setq he-tried-table (cons he-search-string he-tried-table)))
+      (setq he-expand-list
+        (and (not (equal he-search-string ""))
+          (he-flexible-abbrev-collect he-search-string)))))
   (while (and he-expand-list
-              (he-string-member (car he-expand-list) he-tried-table))
+           (he-string-member (car he-expand-list) he-tried-table))
     (setq he-expand-list (cdr he-expand-list)))
   (if (null he-expand-list)
-      (progn
-        (if old (he-reset-string))
-        ())
+    (progn
+      (if old (he-reset-string))
+      ())
     (progn
       (he-substitute-string (car he-expand-list))
       (setq he-expand-list (cdr he-expand-list))
@@ -134,7 +134,7 @@ string).  It returns t if a new completion is found, nil otherwise."
 See docstring for `try-expand-flexible-abbrev' for information
 about what flexible matching means in this context."
   (let ((collection nil)
-        (regexp (he-flexible-abbrev-create-regexp str)))
+         (regexp (he-flexible-abbrev-create-regexp str)))
     (save-excursion
       (goto-char (point-min))
       (while (search-forward-regexp regexp nil t)
@@ -149,10 +149,10 @@ See docstring for `try-expand-flexible-abbrev' for information
 about what flexible matching means in this context."
   (let ((constituent "[A-za-z0-9_]*"))
     (concat (mapconcat (lambda (x) (concat constituent (list x))) str "")
-            constituent)))
+      constituent)))
 
 (setq hippie-expand-try-functions-list
-      (cons 'try-expand-flexible-abbrev hippie-expand-try-functions-list))
+  (cons 'try-expand-flexible-abbrev hippie-expand-try-functions-list))
 
 
 
@@ -163,11 +163,11 @@ about what flexible matching means in this context."
   "Renames both current buffer and file it's visiting to NEW-NAME."
   (interactive "sNew name: ")
   (let ((name (buffer-name))
-        (filename (buffer-file-name)))
+         (filename (buffer-file-name)))
     (if (not filename)
-        (message "Buffer '%s' is not visiting a file!" name)
+      (message "Buffer '%s' is not visiting a file!" name)
       (if (get-buffer new-name)
-          (message "A buffer named '%s' already exists!" new-name)
+        (message "A buffer named '%s' already exists!" new-name)
         (progn
           (rename-file name new-name 1)
           (rename-buffer new-name)
@@ -181,19 +181,24 @@ about what flexible matching means in this context."
   "Make script executable on saving."
   (interactive)
   (if (not (= (shell-command (concat "test -x " (buffer-file-name))) 0))
-      (progn 
-        ;; This puts message in *Message* twice, but minibuffer
-        ;; output looks better.
-        (message (concat "Wrote " (buffer-file-name)))
-        (save-excursion
-          (goto-char (point-min))
-          (if (looking-at "^#!")
-              (if (= (shell-command  
-                      (concat "chmod u+x " (buffer-file-name)))
-                     0)
-                  (message (concat 
-                            "Wrote and made executable " 
-                            (buffer-file-name)))))))
+    (progn 
+      ;; This puts message in *Message* twice, but minibuffer
+      ;; output looks better.
+      (message (concat "Wrote " (buffer-file-name)))
+      (save-excursion
+        (goto-char (point-min))
+        (if (looking-at "^#!")
+          (if (= (shell-command  
+                   (concat "chmod u+x " (buffer-file-name)))
+                0)
+            (progn
+              (shell-script-mode)
+              (message (concat 
+                       "Wrote and made executable " 
+                         (buffer-file-name)))
+              )
+            
+            ))))
     ;; This puts message in *Message* twice, but minibuffer output
     ;; looks better.
     (message (concat "Wrote " (buffer-file-name)))))
@@ -205,7 +210,7 @@ about what flexible matching means in this context."
 (defun auto-load-mode (filetypes mode)
   "Autoload mode for filetype regex or a list of filetypes."
   (if (stringp filetypes)
-      (add-to-list 'auto-mode-alist (cons filetypes mode))
+    (add-to-list 'auto-mode-alist (cons filetypes mode))
     (dolist (filetype filetypes)
       (add-to-list 'auto-mode-alist (cons filetype mode)))))
 
@@ -221,7 +226,7 @@ about what flexible matching means in this context."
               (unless (window-dedicated-p window)
                 (delete-window window))
               (message "Have at least one window is sticky."))
-          (cdr (window-list)))
+    (cdr (window-list)))
   )
 
 (defun ~delete-window ()
@@ -238,13 +243,13 @@ about what flexible matching means in this context."
   "Make the current window always display this buffer."
   (interactive)
   (let* ((window (get-buffer-window (current-buffer)))
-         (dedicated? (window-dedicated-p window)))
+          (dedicated? (window-dedicated-p window)))
     (if (not dedicated?)
-        (progn
-          (face-remap-add-relative 'mode-line-sticky-face
-                                   '(:foreground "#8BE03C"))
-          (message "Window '%s' is sticky now" (current-buffer))
-          )
+      (progn
+        (face-remap-add-relative 'mode-line-sticky-face
+          '(:foreground "#8BE03C"))
+        (message "Window '%s' is sticky now" (current-buffer))
+        )
       (progn
         (face-remap-add-relative 'mode-line '(:background "#0D1011"))
         (message "window '%s' is normal" (current-buffer))
@@ -261,8 +266,8 @@ about what flexible matching means in this context."
 of the message, MSG is the context."
   (interactive)
   (if (eq window-system 'x)
-      (shell-command (concat "notify-send "
-                             " '" title "' '" msg "'"))
+    (shell-command (concat "notify-send "
+                     " '" title "' '" msg "'"))
     ;; text only version
     (message (concat title ": " msg))))
 
@@ -298,35 +303,35 @@ A emacs buffer is one who's name starts with *.
 Else it is a user buffer."
   (interactive)
   (let (ξemacs-buff-p
-        (ξorg-p (string-match "^*Org Src" (buffer-name))))
+         (ξorg-p (string-match "^*Org Src" (buffer-name))))
 
     (setq ξemacs-buff-p (if (string-match "^*" (buffer-name)) t nil))
 
     (if (string= major-mode "minibuffer-inactive-mode")
-        (minibuffer-keyboard-quit) ; if the buffer is minibuffer
+      (minibuffer-keyboard-quit) ; if the buffer is minibuffer
       (progn
         ;; offer to save buffers that are non-empty and modified, even for
         ;; non-file visiting buffer. (because kill-buffer does not offer
         ;; to save buffers that are not associated with files)
         (when (and (buffer-modified-p)
-                   (not ξemacs-buff-p)
-                   (not (string-equal major-mode "dired-mode"))
-                   (if (equal (buffer-file-name) nil)
-                       (if (string-equal "" (save-restriction (widen) (buffer-string))) nil t)
-                     t))
+                (not ξemacs-buff-p)
+                (not (string-equal major-mode "dired-mode"))
+                (if (equal (buffer-file-name) nil)
+                  (if (string-equal "" (save-restriction (widen) (buffer-string))) nil t)
+                  t))
           (if (y-or-n-p (format "Buffer %s modified; Do you want to save? " (buffer-name)))
-              (save-buffer)
+            (save-buffer)
             (set-buffer-modified-p nil)))
         (when (and (buffer-modified-p)
-                   ξorg-p)
+                ξorg-p)
           (if (y-or-n-p (format "Buffer %s modified; Do you want to save? " (buffer-name)))
-              (org-edit-src-save)
+            (org-edit-src-save)
             (set-buffer-modified-p nil)))
 
         ;; save to a list of closed buffer
         (when (not (equal buffer-file-name nil))
           (setq xah-recently-closed-buffers
-                (cons (cons (buffer-name) (buffer-file-name)) xah-recently-closed-buffers))
+            (cons (cons (buffer-name) (buffer-file-name)) xah-recently-closed-buffers))
           (when (> (length xah-recently-closed-buffers) xah-recently-closed-buffers-max)
             (setq xah-recently-closed-buffers (butlast xah-recently-closed-buffers 1))))
 
@@ -349,8 +354,8 @@ Else it is a user buffer."
   "Open recently closed file."
   (interactive)
   (find-file (ido-completing-read
-              "Open:" (mapcar (lambda (f)
-                                (cdr f)) xah-recently-closed-buffers))))
+               "Open:" (mapcar (lambda (f)
+                                 (cdr f)) xah-recently-closed-buffers))))
 
 ;; Create new buffer at ~/tmp by default
 (defun ~new-empty-buffer ()
@@ -373,11 +378,11 @@ URL `http://ergoemacs.org/emacs/modernization_upcase-word.html'
 Version 2016-01-08"
   (interactive)
   (let (
-        (deactivate-mark nil)
-        ξp1 ξp2)
+         (deactivate-mark nil)
+         ξp1 ξp2)
     (if (use-region-p)
-        (setq ξp1 (region-beginning)
-              ξp2 (region-end))
+      (setq ξp1 (region-beginning)
+        ξp2 (region-end))
       (save-excursion
         (skip-chars-backward "[:alnum:]")
         (setq ξp1 (point))
@@ -386,15 +391,15 @@ Version 2016-01-08"
     (when (not (eq last-command this-command))
       (put this-command 'state 0))
     (cond
-     ((equal 0 (get this-command 'state))
-      (upcase-initials-region ξp1 ξp2)
-      (put this-command 'state 1))
-     ((equal 1  (get this-command 'state))
-      (upcase-region ξp1 ξp2)
-      (put this-command 'state 2))
-     ((equal 2 (get this-command 'state))
-      (downcase-region ξp1 ξp2)
-      (put this-command 'state 0)))))
+      ((equal 0 (get this-command 'state))
+        (upcase-initials-region ξp1 ξp2)
+        (put this-command 'state 1))
+      ((equal 1  (get this-command 'state))
+        (upcase-region ξp1 ξp2)
+        (put this-command 'state 2))
+      ((equal 2 (get this-command 'state))
+        (downcase-region ξp1 ξp2)
+        (put this-command 'state 0)))))
 
 
 
@@ -413,23 +418,23 @@ Version 2015-04-29"
   (save-restriction
     (narrow-to-region φbegin φend)
     (xah-replace-regexp-pairs-region
-     (point-min)
-     (point-max)
-     '(["  +" " "]))
+      (point-min)
+      (point-max)
+      '(["  +" " "]))
     (xah-replace-pairs-region
-     (point-min)
-     (point-max)
-     '(
-       ["\n" ""]
-       [" /* " "/*"]
-       [" */ " "*/"]
-       [" {" "{"]
-       ["{ " "{"]
-       ["; " ";"]
-       [": " ":"]
-       [";}" "}"]
-       ["}" "}\n"]
-       ))))
+      (point-min)
+      (point-max)
+      '(
+         ["\n" ""]
+         [" /* " "/*"]
+         [" */ " "*/"]
+         [" {" "{"]
+         ["{ " "{"]
+         ["; " ";"]
+         [": " ":"]
+         [";}" "}"]
+         ["}" "}\n"]
+         ))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -440,8 +445,8 @@ Version 2015-04-29"
   "Determine if a string is empty.  `nil' is treated as empty
 string."
   (or (null str)
-      (and (stringp str)
-           (= 0 (length str)))))
+    (and (stringp str)
+      (= 0 (length str)))))
 
 (defun ~alist-get (alist key)
   "Return just the value associated with the key in an alist."
@@ -472,43 +477,43 @@ E.g.
 ;;  \(path . \"/home/cmpitg/tmp/tmp.txt\"\)\)
 "
   (if (not (string-match "@" connection-string))
-      `((protocol . "")
-        (username . ,user-login-name)
-        (host     . "localhost")
-        (port     . "")
-        (path     . ,connection-string))
+    `((protocol . "")
+       (username . ,user-login-name)
+       (host     . "localhost")
+       (port     . "")
+       (path     . ,connection-string))
     (cl-flet ((get-path (host-and-path)
-                     (if (string-match (rx (group "/" (1+ anything))) host-and-path)
-                         (match-string 1 host-and-path)
-                       "/tmp/"))
-           (get-port (host-and-path)
-                     (if (string-match (rx (1+ (not (any "\\")))
-                                           "#"
-                                           (group (1+ digit)))
-                                       host-and-path)
-                         (match-string 1 host-and-path)
-                       "22"))
-           (get-host (host-and-path)
-                     (if (string-match (rx bol
-                                           (group (1+ (not (any "#" ":")))))
-                                       host-and-path)
-                         (match-string 1 host-and-path)
-                       "localhost")))
+                (if (string-match (rx (group "/" (1+ anything))) host-and-path)
+                  (match-string 1 host-and-path)
+                  "/tmp/"))
+               (get-port (host-and-path)
+                 (if (string-match (rx (1+ (not (any "\\")))
+                                     "#"
+                                     (group (1+ digit)))
+                       host-and-path)
+                   (match-string 1 host-and-path)
+                   "22"))
+               (get-host (host-and-path)
+                 (if (string-match (rx bol
+                                     (group (1+ (not (any "#" ":")))))
+                       host-and-path)
+                   (match-string 1 host-and-path)
+                   "localhost")))
 
       (string-match "^/\\([^:]+\\):\\([^@]+\\)@\\(.*\\)$" connection-string)
 
       (let* ((protocol      (match-string 1 connection-string))
-             (username      (match-string 2 connection-string))
-             (host-and-path (match-string 3 connection-string))
-             
-             (host          (get-host host-and-path))
-             (port          (get-port host-and-path))
-             (path          (get-path host-and-path)))
+              (username      (match-string 2 connection-string))
+              (host-and-path (match-string 3 connection-string))
+              
+              (host          (get-host host-and-path))
+              (port          (get-port host-and-path))
+              (path          (get-path host-and-path)))
         `((protocol . ,protocol)
-          (username . ,username)
-          (host     . ,host)
-          (port     . ,port)
-          (path     . ,path))))))
+           (username . ,username)
+           (host     . ,host)
+           (port     . ,port)
+           (path     . ,path))))))
 
 (defun ~open-current-file-as-admin ()
   "Open the current buffer as *nix root.
@@ -516,31 +521,31 @@ This command works on `sudo` *nixes only."
   (interactive)
   (when buffer-file-name
     (let* ((parsed-data (~parse-tramp-argument buffer-file-name))
-           (username  (~alist-get parsed-data 'username))
-           (host      (~alist-get parsed-data 'host))
-           (path      (~alist-get parsed-data 'path))
-           (port      (~alist-get parsed-data 'port)))
+            (username  (~alist-get parsed-data 'username))
+            (host      (~alist-get parsed-data 'host))
+            (path      (~alist-get parsed-data 'path))
+            (port      (~alist-get parsed-data 'port)))
       (find-alternate-file
-       (if (~string-empty? port)
-           (format "/sudo:root@%s:%s"
-                   host
-                   path)
-         ;; See Tramp's multiple hop
-         (progn
-           (message (format "/ssh:%s@%s#%s|sudo:%s#%s:%s"
-                            username
-                            host
-                            port
-                            host
-                            port
-                            path))
-           (format "/ssh:%s@%s#%s|sudo:%s#%s/%s"
-                   username
-                   host
-                   port
-                   host
-                   port
-                   path)))))))
+        (if (~string-empty? port)
+          (format "/sudo:root@%s:%s"
+            host
+            path)
+          ;; See Tramp's multiple hop
+          (progn
+            (message (format "/ssh:%s@%s#%s|sudo:%s#%s:%s"
+                       username
+                       host
+                       port
+                       host
+                       port
+                       path))
+            (format "/ssh:%s@%s#%s|sudo:%s#%s/%s"
+              username
+              host
+              port
+              host
+              port
+              path)))))))
 
 
 ;; (defalias 'qrr 'query-replace-Regexp)
