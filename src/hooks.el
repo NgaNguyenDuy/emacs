@@ -1,6 +1,6 @@
 
 
-(auto-load-mode '("\\.aliasrc$" "\\.set_env$") 'sh-mode)
+(auto-load-mode '("\\.zsh$" "\\.set_env$") 'sh-mode)
 
 (auto-load-mode '("\\Dockerfile\\'") 'dockerfile-mode)
 
