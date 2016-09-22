@@ -43,10 +43,8 @@
 
 
 
-;;
-;; Post-handler function for few define smartparens
-;;
 (defun my-open-block-without-ret (id action context)
+  "Post-handler for few define smartparens"
   (when (eq action 'insert)
     (newline)
     (newline)
@@ -55,9 +53,6 @@
     (indent-according-to-mode)))
 
 
-;;
-;; filter annoying messages
-;;
 (defvar message-filter-regexp-list '("^Starting new Ispell process \\[.+\\] \\.\\.\\.$"
                                       "^Ispell process killed$")
   "filter formatted message string to remove noisy messages")
@@ -76,9 +71,6 @@
           ad-do-it)))))
 
 
-;;
-;; Helper function for display buffer-name in modeline
-;;
 (defun shorten-directory (dir max-length)
   "Show up to `max-length' characters of a directory name `dir'."
   (let ((path (reverse (split-string (abbreviate-file-name dir) "/")))
@@ -174,9 +166,6 @@ about what flexible matching means in this context."
           (set-visited-file-name new-name)
           (set-buffer-modified-p nil))))))
 
-;;
-;; Make script executable on saving
-;;
 (defun make-executable-on-save ()
   "Make script executable on saving."
   (interactive)
@@ -215,12 +204,9 @@ about what flexible matching means in this context."
       (add-to-list 'auto-mode-alist (cons filetype mode)))))
 
 
-;;
-;; Window functional helper
-;; Thank to cmpitg: https://github.com/cmpitg/emacs-cmpitg
-;;
 (defun ~one-window ()
-  "Delete all other non-dedicate window."
+  "Delete all other non-dedicate window.
+Thank to cmpitg: https://github.com/cmpitg/emacs-cmpitg"
   (interactive)
   (mapcar #'(lambda (window)
               (unless (window-dedicated-p window)
@@ -257,13 +243,10 @@ about what flexible matching means in this context."
     (set-window-dedicated-p window (not dedicated?))))
 
 
-;;
-;; Popup notification
-;; http://emacs-fu.blogspot.ae/2009/11/showing-pop-ups.html
-;;
 (defun djcb-popup (title msg)
   "Show a popup if we're on X, or echo it otherwise; TITLE is the title
-of the message, MSG is the context."
+Ref: http://emacs-fu.blogspot.ae/2009/11/showing-pop-ups.html of the message, 
+MSG is the context."
   (interactive)
   (if (eq window-system 'x)
     (shell-command (concat "notify-send "
@@ -401,13 +384,6 @@ Version 2016-01-08"
         (downcase-region ξp1 ξp2)
         (put this-command 'state 0)))))
 
-
-
-
-;;
-;; Remove unnecessary whitespace of css
-;; Thank xah-lee for this functional
-;;
 (require 'xah-replace-pairs (load-f "xah-replace-pairs.el"))
 (defun xah-css-compact-css-region (φbegin φend)
   "Remove unnecessary whitespaces of CSS source code in region.
@@ -437,9 +413,6 @@ Version 2015-04-29"
          ))))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Open file as admin functional
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun ~string-empty? (str)
   "Determine if a string is empty.  `nil' is treated as empty
@@ -547,6 +520,114 @@ This command works on `sudo` *nixes only."
               port
               path)))))))
 
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Erlang utils
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun my-erlang-mode-hook()
+  "Custom erlang mode"
+  (local-set-key (kbd "C-c C-c") 'erlang-compile)
+  (local-set-key (kbd "C-c C-p") 'execute-command-in-erlang-shell)
+  (local-set-key (kbd "C-<f1>") 'erlang-man-function))
+
+(defun execute-command-in-erlang-shell (&optional command)
+  "Send an command to erlang shell"
+  (interactive)
+  (let ((command (cond ((not (~string-empty? command))
+                         command)
+                   ((~is-selecting?)
+                     (~current-selection))
+                   (t
+                     (read-string "Command: ")))))
+    (with-current-buffer "*erlang*"
+      (insert command)
+      (comint-send-input)
+      )
+    )
+  )
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Eshell utils
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun switch-to-eshell-back-and-forth ()
+  "Switch to eshell if current is not eshell, and switch to last
+active buffer if current buffer is eshell."
+  (interactive)
+  (cond ((string-match-p "\\*.*eshell.*\\*" (~current-buffer-name))
+         (switch-to-last-buffer))
+        (t
+         (eshell))))
+
+(defun execute-command-in-eshell (&optional command)
+  "Execute a command in the only \*eshell\* buffer."
+  (interactive)
+  (let ((command (cond ((not (~string-empty? command))
+                        command)
+                       ((~is-selecting?)
+                        (~current-selection))
+                       (t
+                        (read-string "Command: ")))))
+    (with-current-buffer "*eshell*"
+      (call-interactively 'end-of-buffer)
+      (insert command)
+      (call-interactively 'eshell-send-input))))
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Buffer utils
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun ~current-buffer-name()
+  "Get current buffer name"
+  (buffer-name (current-buffer)))
+
+(defun switch-to-last-buffer ()
+  "Switch to last buffer."
+  (interactive)
+  (let ((old-name (~current-buffer-name)))
+    (switch-to-buffer (other-buffer))
+    (while (or (s-starts-with? "*" (~current-buffer-name))
+               (s-equals? old-name (~current-buffer-name)))
+      (previous-buffer))))
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; String utilities
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun ~string-empty? (str)
+  "Determine if a string is empty.  `nil' is treated as empty
+string."
+  (or (null str)
+      (and (stringp str)
+           (= 0 (length str)))))
+
+(defun ~is-selecting? ()
+  "Determine if a selection is being held."
+  (region-active-p))
+
+(defun ~current-selection ()
+  "Return the current selected text."
+  (if (~is-selecting?)
+    (buffer-substring (~selection-start)
+                      (~selection-end))
+    ""))
+
+(defun ~selection-start ()
+  "Return the position of the start of the current selection."
+  (region-beginning))
+
+(defun ~selection-end ()
+  "Return the position of the end of the current selection."
+  (region-end))
 
 ;; (defalias 'qrr 'query-replace-Regexp)
 

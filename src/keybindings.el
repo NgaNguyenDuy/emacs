@@ -28,6 +28,7 @@
 (bind-key "C-S-<f4>" 'xah-open-last-closed)
 (bind-key "<f8>" 'helm-buffers-list)
 (bind-key "C-<f8>" 'xah-open-recently-closed)
+(bind-key "C-<escape>" 'switch-to-last-buffer)
 ;; (bind-key "<f12>" 'helm-M-x)
 
 
@@ -91,14 +92,18 @@
 ;; Programming Mode
 ;;
 (add-hook 'emacs-lisp-mode-hook
-          (lambda ()
-            (hs-minor-mode t)
-            (local-set-key (kbd "C-c <right>") 'hs-show-block)
-            (local-set-key (kbd "C-c <left>")  'hs-hide-block)
-            (local-set-key (kbd "C-c <up>")    'hs-hide-all)
-            (local-set-key (kbd "C-c <down>")  'hs-show-all)
-            (define-key emacs-lisp-mode-map (kbd "C-c C-r") 'eval-region)
-            (define-key emacs-lisp-mode-map (kbd "C-c C-b") 'eval-buffer)))
+  (lambda ()
+    (hs-minor-mode t)
+    (local-set-key (kbd "C-c <right>") 'hs-show-block)
+    (local-set-key (kbd "C-c <left>")  'hs-hide-block)
+    (local-set-key (kbd "C-c <up>")    'hs-hide-all)
+    (local-set-key (kbd "C-c <down>")  'hs-show-all)
+    (define-key emacs-lisp-mode-map (kbd "C-c C-r") 'eval-region)
+    (define-key emacs-lisp-mode-map (kbd "C-c C-b") 'eval-buffer)))
+
+
+;; Custom erlang mode
+(add-hook 'erlang-mode-hook 'my-erlang-mode-hook)
 
 ;; Css mode
 (add-hook 'css-mode-hook
