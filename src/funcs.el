@@ -193,9 +193,6 @@ about what flexible matching means in this context."
     (message (concat "Wrote " (buffer-file-name)))))
 
 
-;;
-;; 
-;;
 (defun auto-load-mode (filetypes mode)
   "Autoload mode for filetype regex or a list of filetypes."
   (if (stringp filetypes)
@@ -529,10 +526,10 @@ This command works on `sudo` *nixes only."
 (defun my-erlang-mode-hook()
   "Custom erlang mode"
   (local-set-key (kbd "C-c C-c") 'erlang-compile)
-  (local-set-key (kbd "C-c C-p") 'execute-command-in-erlang-shell)
+  (local-set-key (kbd "C-c C-p") 'send-command-to-erlang-shell)
   (local-set-key (kbd "C-<f1>") 'erlang-man-function))
 
-(defun execute-command-in-erlang-shell (&optional command)
+(defun send-command-to-erlang-shell (&optional command)
   "Send an command to erlang shell"
   (interactive)
   (let ((command (cond ((not (~string-empty? command))
@@ -559,7 +556,7 @@ This command works on `sudo` *nixes only."
 active buffer if current buffer is eshell."
   (interactive)
   (cond ((string-match-p "\\*.*eshell.*\\*" (~current-buffer-name))
-         (switch-to-last-buffer))
+         (~switch-to-last-buffer))
         (t
          (eshell))))
 
@@ -587,7 +584,7 @@ active buffer if current buffer is eshell."
   "Get current buffer name"
   (buffer-name (current-buffer)))
 
-(defun switch-to-last-buffer ()
+(defun ~switch-to-last-buffer ()
   "Switch to last buffer."
   (interactive)
   (let ((old-name (~current-buffer-name)))

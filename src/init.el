@@ -21,6 +21,7 @@
 
 
 (require 'e:funcs (load-f "funcs.el"))
+(require 'e:skeletons (load-f "skeletons.el"))
 (require 'e:list-pkg (load-f "tspyimt-pkg.el"))
 (require 'e:load-pkg (load-f "load-pkg.el"))
 (require 'e:hooks (load-f "hooks.el"))

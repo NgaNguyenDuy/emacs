@@ -28,7 +28,7 @@
 (bind-key "C-S-<f4>" 'xah-open-last-closed)
 (bind-key "<f8>" 'helm-buffers-list)
 (bind-key "C-<f8>" 'xah-open-recently-closed)
-(bind-key "C-<escape>" 'switch-to-last-buffer)
+(bind-key "C-<escape>" '~switch-to-last-buffer)
 ;; (bind-key "<f12>" 'helm-M-x)
 
 
