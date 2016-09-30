@@ -11,7 +11,7 @@
   "-module(" (file-name-sans-extension
                (file-name-nondirectory (buffer-file-name)))
   ").\n"
-  "-import(["
+  "-export(["
   > _
   "]).")
 
