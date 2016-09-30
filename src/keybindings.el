@@ -117,6 +117,8 @@
 (bind-key "M-x" 'smex)
 (bind-key "s--" 'comment-or-uncomment-region)
 (bind-key "s-w" 'whitespace-mode)
+(bind-key "s-u" 'unicode-input-mode)
+
 
 
 (provide 'e:keybindings)
