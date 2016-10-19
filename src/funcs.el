@@ -20,6 +20,9 @@
 ;; http://emacs-fu.blogspot.com/2009/12/changing-cursor-color-and-shape.html
 ;; valid values are t, nil, box, hollow, bar, (bar . WIDTH), hbar,
 ;; (hbar. HEIGHT); see the docs for set-cursor-type
+
+(require 'cl)
+
 (defun set-cursor-according-to-mode ()
   "Change cursor color and type according to some minor modes."
   (let ((read-only-color "#CE4045")
@@ -349,6 +352,19 @@ Reference: http://ergoemacs.org/emacs/emacs_new_empty_buffer.html"
     (setq buffer-offer-save t)))
 
 
+;; Bind with prefix in evil normal state and global mode
+(defun* ~bind-key-with-prefix (key command &key
+                                   (keymap global-map)
+                                   (evil-keymap evil-normal-state-map))
+  "Bind key in `evil-normal-state-map' with prefix `SPC' and in
+global mode map with prefix `s-SPC' at the same time."
+  (interactive)
+  (eval `(progn
+           (bind-key ,(format "s-SPC %s" key) command keymap)
+           (bind-key ,(format "SPC %s" key) command evil-keymap)))
+  )
+
+
 ;; Toggle letter case
 (defun xah-toggle-letter-case ()
   "Toggle the letter case of current word or text selection.
@@ -486,6 +502,7 @@ E.g.
            (port     . ,port)
            (path     . ,path))))))
 
+
 (defun ~open-current-file-as-admin ()
   "Open the current buffer as *nix root.
 This command works on `sudo` *nixes only."
@@ -520,6 +537,29 @@ This command works on `sudo` *nixes only."
 
 
 
+;;
+;; Evil configurations
+;;
+(defun ~evil-define-key (key func)
+  "Define keymap in all evil states."
+  (define-key evil-normal-state-map key func)
+  (define-key evil-insert-state-map key func)
+  (define-key evil-visual-state-map key func)
+  (define-key evil-replace-state-map key func)
+  (define-key evil-operator-state-map key func)
+  (define-key evil-motion-state-map key func))
+
+(defun ~toggle-evil-local ()
+  "Toggle evil-mode for current buffer."
+  (interactive)
+  (if evil-local-mode
+    (progn
+      (evil-local-mode -1)
+      (setq cursor-type 'bar))
+    (evil-local-mode)))
+
+(defalias 'toggle-evil-local '~toggle-evil-local)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Erlang utils
@@ -527,7 +567,9 @@ This command works on `sudo` *nixes only."
 (defun my-erlang-mode-hook()
   "Custom erlang mode"
   (local-set-key (kbd "C-c C-p") 'send-command-to-erlang-shell)
-  (local-set-key (kbd "C-<f1>") 'erlang-man-function))
+  (local-set-key (kbd "C-<f1>") 'erlang-man-function)
+  (add-hook 'erlang-mode-hook #'smartparens-mode)
+  )
 
 (defun send-command-to-erlang-shell (&optional command)
   "Send an command to erlang shell"
@@ -627,5 +669,44 @@ string."
   (region-end))
 
 ;; (defalias 'qrr 'query-replace-Regexp)
+
+
+;;
+;; Neotree
+;;
+(defun* ~neotree (&optional (dir "."))
+  "Start NeoTree."
+  (interactive)
+  (neotree-dir dir)
+  (call-interactively 'other-window))
+
+(defun bind-spacemacs-like-keys ()
+  "Bind keys inspired by Spacemacs."
+  (interactive)
+  
+  ;; Remove this prefix key by any chance
+  (bind-key "s-SPC" 'nil)
+  
+  (~bind-key-with-prefix "SPC" 'helm-M-x)
+
+
+  ;; Buffer
+  (~bind-key-with-prefix "s b" 'save-buffer)
+  (~bind-key-with-prefix "l b" 'helm-buffers-list)
+  (~bind-key-with-prefix "r b" 'revert-buffer)
+  (~bind-key-with-prefix "n n" '~new-empty-buffer)
+  (~bind-key-with-prefix "p p" 'popwin:messages)
+
+  ;; Git
+  (~bind-key-with-prefix "g s" '~git/status)
+
+   ;; File
+  (~bind-key-with-prefix "f o" 'ido-find-file-other-window)
+  (~bind-key-with-prefix "f b" '~file/browse)
+  (~bind-key-with-prefix "o a" '~neotree)
+
+  (defalias '~file/browse 'neotree-toggle)
+  (defalias '~git/status 'magit-status)
+  )
 
 (provide 'e:funcs)

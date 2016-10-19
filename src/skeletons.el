@@ -1,4 +1,5 @@
 ;;; Adds hook to find-files-hook
+
 (auto-insert-mode)
 
 (define-skeleton erl-head

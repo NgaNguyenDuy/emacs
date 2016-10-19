@@ -33,4 +33,4 @@
 ;; Show loading activity in *Message* if loaded packages take longer than 0.1s
 (setq use-package-verbose t)
 
-(provide 'e:list-pkg)
+(provide 'e:pkg-manager)

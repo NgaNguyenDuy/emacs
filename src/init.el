@@ -23,8 +23,9 @@
 (require 'e:unicode-input (load-f "libs/unicode-input.el"))
 (require 'e:funcs (load-f "funcs.el"))
 ;; (require 'e:skeletons (load-f "skeletons.el")) ;; disabled auto-insert-header
-(require 'e:list-pkg (load-f "tspyimt-pkg.el"))
-(require 'e:load-pkg (load-f "load-pkg.el"))
+(require 'e:pkg-manager (load-f "config-pkg.el"))
+(require 'e:essen-pkgs (load-f "essen-pkgs.el"))
+(require 'e:tspyimt-pkgs (load-f "tspyimt-pkgs.el"))
 (require 'e:hooks (load-f "hooks.el"))
 (require 'e:settings (load-f "settings.el"))
 (require 'e:env (load-f "env.el"))

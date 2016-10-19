@@ -15,9 +15,6 @@
 ;; with this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 
-(require 'cl-lib)
-(require 'color)
-(require 'cl)
 
 (dolist (theme-file (directory-files (~get-cfg "themes/")))
   (when (s-ends-with? ".el" theme-file)

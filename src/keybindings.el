@@ -29,6 +29,7 @@
 (bind-key "<f8>" 'helm-buffers-list)
 (bind-key "C-<f8>" 'xah-open-recently-closed)
 (bind-key "C-<escape>" '~switch-to-last-buffer)
+(bind-key "C-c C-n" '~new-empty-buffer)
 ;; (bind-key "<f12>" 'helm-M-x)
 
 
@@ -89,8 +90,12 @@
 (bind-key "C-S-<mouse-1>" 'mc/add-cursor-on-click)
 
 ;;
-;; Programming Mode
+;; Mode
 ;;
+
+(bind-key "C-<menu> C-f" 'auto-fill-mode)
+(bind-key "C-<menu> C-e" 'toggle-evil-local)
+
 (add-hook 'emacs-lisp-mode-hook
   (lambda ()
     (hs-minor-mode t)
@@ -102,7 +107,7 @@
     (define-key emacs-lisp-mode-map (kbd "C-c C-b") 'eval-buffer)))
 
 
-;; Custom erlang mode
+;; Erlang mode
 (add-hook 'erlang-mode-hook 'my-erlang-mode-hook)
 
 ;; Css mode
@@ -119,6 +124,11 @@
 (bind-key "s-w" 'whitespace-mode)
 (bind-key "s-u" 'unicode-input-mode)
 
+
+;;
+;; neotree
+;;
+(bind-key "<f7>" '~neotree)
 
 
 (provide 'e:keybindings)
