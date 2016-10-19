@@ -526,7 +526,6 @@ This command works on `sudo` *nixes only."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun my-erlang-mode-hook()
   "Custom erlang mode"
-  (local-set-key (kbd "C-c C-c") 'erlang-compile)
   (local-set-key (kbd "C-c C-p") 'send-command-to-erlang-shell)
   (local-set-key (kbd "C-<f1>") 'erlang-man-function))
 
