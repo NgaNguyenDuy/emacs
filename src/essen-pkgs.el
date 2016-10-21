@@ -355,6 +355,13 @@
             ))
 
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; all-the-icons
+;; https://github.com/domtronn/all-the-icons.el
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package all-the-icons)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Evil mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -381,8 +388,29 @@
             ;; (define-key evil-insert-state-map "\C-o" '~open-line)
             (define-key evil-insert-state-map "\C-w" 'kill-region)
 
+            ;; (setq
+            ;;   ;; evil-normal-state-tag   (propertize "<N>" 'face '((:foreground "green")))
+            ;;   evil-emacs-state-tag    (propertize (all-the-icons-fileicon "emacs") 'face 'powerline-evil-emacs-face 'display '(raise -0.1))
+            ;;   ;; evil-insert-state-tag   (propertize "I" 'face '((:background "red")))
+            ;;   ;; evil-motion-state-tag   (propertize "M" 'face '((:background "blue")))
+            ;;   ;; evil-visual-state-tag   (propertize "V" 'face '((:background "grey80" :foreground "black")))
+            ;;   ;; evil-operator-state-tag (propertize "O" 'face '((:background "purple")))
+            ;;   )
+
+            ;;(lexical-let ((default-color (cons (face-background 'mode-line)
+            ;;                               (face-foreground 'mode-line))))
+            ;;  (add-hook 'post-command-hook
+            ;;    (lambda ()
+            ;;      (let ((color (cond ((minibufferp) default-color)
+            ;;                     ((evil-insert-state-p) '("#e80000" . "#ffffff"))
+            ;;                     ((evil-emacs-state-p)  '("#444488" . "#ffffff"))
+            ;;                     ((buffer-modified-p)   '("#006fa0" . "#ffffff"))
+            ;;                     (t default-color))))
+            ;;        (set-face-background 'mode-line (car color))
+            ;;        (set-face-foreground 'mode-line (cdr color))))))
 
             (bind-spacemacs-like-keys)
+
 
             ;; Make visual select by v or V and then hit * to search forward,
             ;; # to search backward
@@ -396,11 +424,21 @@
             ))
 
 
+(use-package powerline
+  :config (progn
+            (powerline-tspyimt-theme)
+            ;; (setq-default powerline-height 20)
+            ;; Valid Values: alternate, arrow, arrow-fade, bar, box, brace,
+            ;; butt, chamfer, contour, curve, rounded, roundstub, wave, zigzag,
+            ;; utf-8.
+            ;; (setq-default powerline-default-separator 'arrow)
+            ))
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Docker file mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package dockerfile-mode
-  :ensure t
   :commands dockerfile-mode
   :mode "Dockerfile\\'")
 
