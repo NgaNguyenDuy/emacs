@@ -160,7 +160,12 @@
   :init (progn
           (elpy-enable)
 
-          ;; (add-hook 'python-mode-hook 'my/elpy-mode-hook)
+          ;; (defun my/python-mode-hook ()
+          ;;   "Customized python mode"
+          ;;   (setq python-indent-offset 4)
+          ;;   )
+
+          ;;(add-hook 'python-mode-hook 'my/python-mode-hook)
 	  ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
