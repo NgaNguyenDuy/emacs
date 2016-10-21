@@ -1,4 +1,4 @@
-;;
+;; package -- Summary
 ;; Copyright (C) 2016 Nga Nguyen ([@nganguyenduy](https://github.com/nganguyenduy/))
 ;;
 ;; This project is free software: you can redistribute it and/or modify it
@@ -14,6 +14,10 @@
 ;; You should have received a copy of the GNU General Public License along
 ;; with this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
+;;; Commentary:
+
+
+;;; Code:
 
 
 (dolist (theme-file (directory-files (~get-cfg "themes/")))
@@ -165,59 +169,8 @@
 
 ;; (set-frame-font "ReemKufi:pixelsize=18")
 
-;;
-;; Mode line setup
-;;
-(setq-default
- mode-line-format
- '(
-   ;; Sticked mode line
-   (:eval
-    (let* ((window (get-buffer-window (current-buffer)))
-           (sticky? (window-dedicated-p window)))
-      (cond (sticky?
-             (propertize "  ⚡" 'face 'mode-line-sticky-face))
-            (t ""))))
-   ;; Position, including warning for 78 columns
-   (:propertize "%4l :" face mode-line-position-face)
-   (:eval (propertize "%3c " 'face
-                      (if (> (current-column) 78)
-                          'mode-line-78col-face
-                        'mode-line-position-face)))
-   ;; emacsclient [default -- keep?]
-   mode-line-client
-   "  "
-   ;; read-only or modified status
-   (:eval
-    (cond (buffer-read-only
-           (propertize " RO " 'face 'mode-line-read-only-face))
-          ((buffer-modified-p)
-           (propertize " ** " 'face 'mode-line-modified-face))
-          (t "      ")))
-   "    "
-   ;; directory and buffer/file name
-   (:propertize (:eval (shorten-directory default-directory 30))
-                face mode-line-folder-face)
-   (:propertize "%b"
-                face mode-line-filename-face)
-   ;; narrow [default -- keep?]
-   " %n "
-   ;; mode indicators: vc, recursive edit, major mode, minor modes, process, global
-   (vc-mode vc-mode)
-   "  %["
-   (:propertize mode-name
-                face mode-line-mode-face)
-   "%] "
-   (:eval (propertize (format-mode-line minor-mode-alist)
-                      'face 'mode-line-minor-mode-face))
-   (:propertize mode-line-process
-                face mode-line-process-face)
-   (global-mode-string global-mode-string)
-   "    "
-   ;; nyan-mode uses nyan cat as an alternative to %p
-   ;; (:eval (when nyan-mode (list (nyan-create))))
-   ))
-
+;; Currently modeline
+;; (require 'e:my-modeline (load-f "customize/my-modeline.el"))
 
 
 ;;
@@ -238,3 +191,4 @@
 
 
 (provide 'e:env)
+;;; env.el ends here
