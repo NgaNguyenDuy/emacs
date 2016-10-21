@@ -297,12 +297,11 @@
     ;; buffer is opened with popwin, a new window with the NeoTree buffer is
     ;; displayed side by side next to the first one (#50). This code will help
     ;; you
-
-    ;; (when neo-persist-show
-    ;;   (add-hook 'popwin:before-popup-hook
-    ;;     (lambda () (setq neo-persist-show nil)))
-    ;;   (add-hook 'popwin:after-popup-hook
-    ;;     (lambda () (setq neo-persist-show t))))
+    (when neo-persist-show
+      (add-hook 'popwin:before-popup-hook
+        (lambda () (setq neo-persist-show nil)))
+      (add-hook 'popwin:after-popup-hook
+        (lambda () (setq neo-persist-show t))))
     
     ))
 
