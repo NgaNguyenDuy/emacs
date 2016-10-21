@@ -63,12 +63,12 @@
      ;; Mode line
      (mode-line ((t (:foreground "#D4D7D6" :background "#0D1011"
                                  :family "Righteous" :inverse-video nil :box
-                                 (:line-width 6 :color "#0D1011" :style nil)))
-                 ))
+                                 (:color "#0D1011" :style nil)))
+                 )) ;; :line-width 6
      (mode-line-inactive ((t (:foreground "#D4D7D6" :background "#1E2326"
                                           :family "Righteous"
                                           :inverse-video nil
-                                          :box (:line-width 6 :color "#1E2326"
+                                          :box (:color "#1E2326"
                                                             :style nil)))))
      (mode-line-read-only-face
       ((t (:foreground "#4271ae" :inherit (mode-line-face)
