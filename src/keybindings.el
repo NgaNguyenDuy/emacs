@@ -127,7 +127,8 @@
 ;;
 ;; neotree
 ;;
-(bind-key "<f7>" '~neotree)
+;; (bind-key "<f7>" '~neotree)
+(bind-key "<f7>" 'neotree-toggle)
 
 
 (provide 'e:keybindings)
