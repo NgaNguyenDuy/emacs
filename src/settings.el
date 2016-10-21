@@ -83,4 +83,5 @@
 ;; (nyan-start-animation)
 ;; (setq nyan-wavy-trail t)
 
+
 (provide 'e:settings)
