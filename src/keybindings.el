@@ -92,9 +92,8 @@
 ;;
 ;; Mode
 ;;
-
 (bind-key "C-<menu> C-f" 'auto-fill-mode)
-(bind-key "C-<menu> C-e" 'toggle-evil-local)
+;; (bind-key "C-<menu> C-e" 'toggle-evil-local)
 
 (add-hook 'emacs-lisp-mode-hook
   (lambda ()
