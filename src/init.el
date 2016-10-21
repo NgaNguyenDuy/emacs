@@ -14,6 +14,17 @@
   "Returns path to a config file or directory."
   (apply 'concat *cfg-dir* paths))
 
+(defun get-library-full-path (library-name)
+  "Return the full path to a library."
+  (save-excursion
+    (find-library library-name)
+    (let ((file-path (or
+                       (expand-file-name buffer-file-name)
+                       "")))
+      (kill-buffer)
+      file-path))
+  )
+
 ;; Load config function
 (defun load-f (&rest p)
   "Return full file path."

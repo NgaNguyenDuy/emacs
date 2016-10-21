@@ -99,6 +99,60 @@
   :mode "\\.rkt\\'"
   )
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Python development
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package python
+  :config (progn
+            (auto-load-mode '("\\.py$") 'python-mode)
+
+            ;; Workaround: virtualenvwrapper.el needs to be loaded explicitly
+            (progn
+              (unless (package-installed-p 'virtualenvwrapper)
+                (package-install 'virtualenvwrapper))
+              (load-file (get-library-full-path "virtualenvwrapper")))
+
+            (use-package virtualenvwrapper
+              :config (progn
+                        (venv-initialize-interactive-shells)
+                        (venv-initialize-eshell)
+                        (setq venv-location (or
+                                              (getenv "WORKON_HOME")
+                                              (concat
+                                                (getenv "HOME")
+                                                "/virtual-envs/"
+                                                )
+                                              ))))))
+
+
+;; https://github.com/jorgenschaefer/elpy
+;; http://elpy.readthedocs.io/en/latest/index.html
+;; Config with (elpy-config)
+;;
+;; Setup workflow:
+;; * Open a file in the project
+;; * Run (pyvenv-workon) and choose the appropriate virtual env
+;; * Run (elpy-config) and install necessary dependencies
+;;
+;; Beginning to work:
+;; * Run (pyvenv-workon)
+;; * Have fun
+;; Need install jedi and flake8
+;;
+
+(add-to-list 'package-archives
+  '("elpy" . "http://jorgenschaefer.github.io/packages/"))
+
+(use-package elpy
+  :ensure elpy
+  :init (progn
+          (elpy-enable)
+
+          ;; (add-hook 'python-mode-hook 'my/elpy-mode-hook)
+	  ))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; JavaScript development
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
