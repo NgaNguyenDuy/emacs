@@ -1,12 +1,15 @@
-;;
+;;; package -- Summary
+
+;;; Commentary:
+
+;;; Code:
+
 ;; Alchemist: Tooling interaction with Elixir
 ;; http://alchemist.readthedocs.org/en/latest/
 ;;
 ;; (use-package alchemist
 ;;   :ensure t
 ;; )
-
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Version control systems: Git
@@ -23,8 +26,6 @@
   :ensure t
   :init (progn
           (setq-default save-place t)))
-
-
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -66,9 +67,6 @@
             )
   )
 
-
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; web-mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -85,9 +83,9 @@
 (setq load-path
       (cons  "~/.bin/otp_7.3/lib/erlang/lib/tools-2.8.3/emacs"
               load-path))
-(setq erlang-root-dir "~/.bin/otp_7.3/lib/erlang")
+(setq-default erlang-root-dir "~/.bin/otp_7.3/lib/erlang")
 (setq exec-path (cons "~/.bin/erlang/bin" exec-path))
-(setq erlang-man-root-dir "~/.bin/otp_7.3/lib/erlang/man")
+(setq-default erlang-man-root-dir "~/.bin/otp_7.3/lib/erlang/man")
 (setq exec-path (cons "~/.bin/erlang/bin/erl" exec-path))
 (require 'erlang-start)
 
@@ -130,3 +128,4 @@
     (editorconfig-mode 1)))
 
 (provide 'e:tspyimt-pkgs)
+;;; tspyimt-pkgs ends here
