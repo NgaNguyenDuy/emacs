@@ -45,7 +45,84 @@
 ;; 
 ;;; Code:
 
+;; Extra mode line faces
 
+(make-face 'mode-line-read-only-face)
+(make-face 'mode-line-modified-face)
+(make-face 'mode-line-folder-face)
+(make-face 'mode-line-filename-face)
+(make-face 'mode-line-position-face)
+(make-face 'mode-line-mode-face)
+(make-face 'mode-line-minor-mode-face)
+(make-face 'mode-line-process-face)
+(make-face 'mode-line-78col-face)
+
+(defface custom-modeline-modified-face
+  '((((class color))
+      :foreground "#c82829" :background "#ffffff" :inherit (mode-line-face))
+     (t (:weight bold)))
+  "Custom modeline modefied"
+  )
+
+(defface custom-modeline-filename-face
+  '((((class color))
+      :foreground "#CA74F3" :inherit (mode-line-face) :height 145)
+     (t (:weight bold)))
+  "Custom modeline filename"
+  )
+
+(defface custom-modeline-folder-face
+  '((((class color))
+      :foreground "gray60" :inherit (mode-line-face))
+     )
+  "Custom modeline folder name"
+  )
+
+(defface custom-modeline-position-face
+  '((((class color))
+      :inherit (mode-line-face) :height 100 :family "Menlo")
+     )
+  "Custom modeline position"
+  )
+
+(defface custom-modeline-mode-face
+  '((((class color))
+      :foreground "gray80" :inherit (mode-line-face))
+     )
+  "Custom modeline mode"
+  )
+
+(defface custom-modeline-minormode-face
+  '((((class color))
+      :foreground "gray40" :height 110 :inherit (custom-modeline-mode-face))
+     )
+  "Custom modeline minor mode"
+  )
+
+(defface custom-modeline-process-face
+  '((((class color))
+      :foreground "#718c00" :inherit (custom-modeline-face))
+     )
+  "Custom modeline process mode"
+  )
+
+(defface custom-modeline-78col-face
+  '((((class color))
+      :foreground "#c82829" :inherit (custom-modeline-position-face))
+     )
+  "Custom modeline process mode"
+  )
+
+(defface custom-modeline-readonly-face
+  '((((class color))
+      :foreground "red" :inherit (mode-line-face)
+      :box (:line-width 2 :color "red")
+      ))
+  "Custom modeline readonly files"
+  )
+
+
+;; Generate modeline format
 (setq-default
   mode-line-format
   '(
@@ -54,42 +131,50 @@
        (let* ((window (get-buffer-window (current-buffer)))
                (sticky? (window-dedicated-p window)))
          (cond (sticky?
-                 (propertize "  ⚡" 'face 'mode-line-sticky-face))
+                 ;; (propertize "  ⚡" 'face 'mode-line-sticky-face)
+                 (concat "  "
+                   (propertize (all-the-icons-octicon "check")
+                     'face `(:height 1.2 :foreground "#8BE03C" :family ,(all-the-icons-octicon-family))
+                     'display '(raise 0.0)
+                     )
+                   )
+                 )
            (t ""))))
      ;; Position, including warning for 78 columns
-     (:propertize "%4l :" face mode-line-position-face)
+     (:propertize "%4l :" face custom-modeline-position-face)
      (:eval (propertize "%3c " 'face
               (if (> (current-column) 78)
-                'mode-line-78col-face
-                'mode-line-position-face)))
+                'custom-modeline-78col-face
+                'custom-modeline-position-face)))
      ;; emacsclient [default -- keep?]
      mode-line-client
      "  "
      ;; read-only or modified status
      (:eval
        (cond (buffer-read-only
-               (propertize " RO " 'face 'mode-line-read-only-face))
+               (propertize " RO " 'face 'custom-modeline-readonly-face))
          ((buffer-modified-p)
-           (propertize " ** " 'face 'mode-line-modified-face))
+           (propertize " ** " 'face 'custom-modeline-modified-face))
          (t "      ")))
      "    "
      ;; directory and buffer/file name
-     (:propertize (:eval (shorten-directory default-directory 30))
+     (:propertize
+       (:eval (shorten-directory default-directory 30))
        face mode-line-folder-face)
      (:propertize "%b"
-       face mode-line-filename-face)
+       face custom-modeline-filename-face)
      ;; narrow [default -- keep?]
      " %n "
      ;; mode indicators: vc, recursive edit, major mode, minor modes, process, global
      (vc-mode vc-mode)
      "  %["
      (:propertize mode-name
-       face mode-line-mode-face)
+       face custom-modeline-mode-face)
      "%] "
      (:eval (propertize (format-mode-line minor-mode-alist)
               'face 'mode-line-minor-mode-face))
      (:propertize mode-line-process
-       face mode-line-process-face)
+       face custom-modeline-process-face)
      (global-mode-string global-mode-string)
      "    "
      ;; nyan-mode uses nyan cat as an alternative to %p

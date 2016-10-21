@@ -17,17 +17,6 @@
 ;; with this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 
-;; Extra mode line faces
-(make-face 'mode-line-read-only-face)
-(make-face 'mode-line-modified-face)
-(make-face 'mode-line-folder-face)
-(make-face 'mode-line-filename-face)
-(make-face 'mode-line-position-face)
-(make-face 'mode-line-mode-face)
-(make-face 'mode-line-minor-mode-face)
-(make-face 'mode-line-process-face)
-(make-face 'mode-line-78col-face)
-(make-face 'mode-line-sticky-face)
 
 (defun color-theme-seti ()
   "Color theme Seti - Dark theme ispired by Atom Seti."
@@ -62,38 +51,40 @@
 
      ;; Mode line
      (mode-line ((t (:foreground "#D4D7D6" :background "#0D1011"
-                                 :family "Righteous" :inverse-video nil :box
-                                 (:color "#0D1011" :style nil)))
+                      :family "Righteous" :inverse-video nil
+                      :box (:color "#0D1011" :style nil)))
                  )) ;; :line-width 6
      (mode-line-inactive ((t (:foreground "#D4D7D6" :background "#1E2326"
-                                          :family "Righteous"
-                                          :inverse-video nil
-                                          :box (:color "#1E2326"
-                                                            :style nil)))))
-     (mode-line-read-only-face
-      ((t (:foreground "#4271ae" :inherit (mode-line-face)
-                       :box (:line-width 2 :color "#4271ae")))))
-     (mode-line-modified-face
-      ((t (:foreground "#c82829" :background "#ffffff"
-                       :inherit (mode-line-face)
-                       :box (:line-width 2 :color "#c82829")))))
-     (mode-line-folder-face
-      ((t (:foreground "gray60" :inherit (mode-line-face)))))
-     (mode-line-filename-face
-      ((t (:foreground "#eab700" :inherit (mode-line-face) :weight bold))))
-     (mode-line-position-face
-      ((t (:height 100 :inherit (mode-line-face) :family "Menlo"))))
-     (mode-line-mode-face
-      ((t (:foreground "gray80" :inherit (mode-line-face)))))
-     (mode-line-minor-mode-face
-      ((t (:foreground "gray40" :height 110 :inherit (mode-line-mode-face)))))
-     (mode-line-process-face
-      ((t (:foreground "#718c00" :inherit (mode-line-face)))))
-     (mode-line-78col-face
-      ((t (:foreground "#c82829" :inherit (mode-line-position-face) ))))
-     ;; (mode-line-buffer-id ((t (:weight bold :foreground "#DCCD69"))))
-     ;; (mode-line-emphasis ((t (:weight bold))))
-     ;; (mode-line-highlight ((t (:box (:line-width 3 :color "#4F99D3")))))
+                               :family "Righteous"
+                               :inverse-video nil
+                               :box (:color "#1E2326"
+                                      :style nil)))))
+      
+      ;; (mode-line-read-only-face
+      ;;  ((t (:foreground "#4271ae" :inherit (mode-line-face)
+      ;;                   :box (:line-width 2 :color "#4271ae")))))
+      ;; (mode-line-modified-face
+      ;;  ((t (:foreground "#c82829" :background "#ffffff"
+      ;;                   :inherit (mode-line-face)
+      ;;                   :box (:line-width 2 :color "#c82829")))))
+      ;; (mode-line-folder-face
+      ;;   ((t (:foreground "gray60" :inherit (mode-line-face)))))
+      ;; (mode-line-filename-face
+      ;;   ((t (:foreground "#eab700" :inherit (mode-line-face) :weight bold))))
+      ;; (mode-line-position-face
+      ;;   ((t (:height 100 :inherit (mode-line-face) :family "Menlo"))))
+      ;; (mode-line-mode-face
+      ;;   ((t (:foreground "gray80" :inherit (mode-line-face)))))
+      ;; (mode-line-minor-mode-face
+      ;;   ((t (:foreground "gray40" :height 110 :inherit (mode-line-mode-face)))))
+      ;; (mode-line-process-face
+      ;;   ((t (:foreground "#718c00" :inherit (mode-line-face)))))
+      ;; (mode-line-78col-face
+      ;;   ((t (:foreground "#c82829" :inherit (mode-line-position-face) ))))
+      
+      ;; (mode-line-buffer-id ((t (:weight bold :foreground "#DCCD69"))))
+      ;; (mode-line-emphasis ((t (:weight bold))))
+      ;; (mode-line-highlight ((t (:box (:line-width 3 :color "#4F99D3")))))
 
      
      ;; Font lock

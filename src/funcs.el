@@ -232,12 +232,13 @@ Thank to cmpitg: https://github.com/cmpitg/emacs-cmpitg"
           (dedicated? (window-dedicated-p window)))
     (if (not dedicated?)
       (progn
-        (face-remap-add-relative 'mode-line-sticky-face
-          '(:foreground "#8BE03C"))
+        ;; (make-face 'mode-line-sticky-face)
+        ;; (face-remap-add-relative 'mode-line-sticky-face
+        ;;   '(:foreground "#8BE03C"))
         (message "Window '%s' is sticky now" (current-buffer))
         )
       (progn
-        (face-remap-add-relative 'mode-line '(:background "#0D1011"))
+        ;; (face-remap-add-relative 'mode-line '(:background "#0D1011"))
         (message "window '%s' is normal" (current-buffer))
         ))
     (set-window-dedicated-p window (not dedicated?))))
