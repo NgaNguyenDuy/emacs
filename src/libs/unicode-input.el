@@ -846,7 +846,7 @@ part of Emacs 23)
 Home page at: URL `http://ergoemacs.org/emacs/unicode-input-math-symbols-input.html'"
   nil
   :global t
-  :lighter " ∑"
+  :lighter " ❄"
   :keymap unicode-input-keymap
   )
 
