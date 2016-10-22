@@ -121,6 +121,47 @@
   uniquify-ignore-buffers-re "^\\*")
 
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Smart completion framework
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package helm-config
+  :ensure helm
+  :diminish helm-mode
+  :commands (helm-find-files helm-buffers-list)
+  :init (use-package helm
+          :config (progn
+                    (helm-autoresize-mode 1)
+
+                    ;; some fuzzy matching
+                    (setq helm-M-x-fuzzy-match t)
+                    (setq helm-buffers-fuzzy-matching t)
+                    (setq helm-recentf-fuzzy-match t)
+                    (setq helm-semantic-fuzzy-match t)
+                    (setq helm-imenu-fuzzy-match t)
+                    (setq helm-locate-fuzzy-match t)
+                    (setq helm-apropos-fuzzy-match t)
+                    (setq helm-lisp-fuzzy-completion t)
+                    
+                    ))
+  )
+
+
+;; Project management with Helm Projectile
+(use-package helm-projectile
+  :ensure t
+  :config
+  (progn
+    (helm-projectile-on)
+    (setq projectile-completion-system 'helm)
+    (setq projectile-require-project-root t)
+    (setq projectile-switch-project-action 'projectile-dired)
+
+    ;; A bug in projectile ignore that doesn't ignore
+    (setq projectile-indexing-method 'native))
+  )
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Buffer navigation with pattern matching and replacing
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -162,8 +203,6 @@
   :diminish company-mode
   :config (progn
             (global-company-mode 1)
-
-            (bind-key "C-/" 'company-complete company-mode-map)
 
             (use-package pos-tip
               :ensure t)
@@ -279,8 +318,9 @@
     (setq neo-theme 'icons)
     ;; (setq neo-theme 'arrow)
 
-    ;; (setq projectile-switch-project-action
-    ;;   'neotree-projectile-action)
+    ;; neotre proper directory When switch project
+    (setq projectile-switch-project-action
+      'neotree-projectile-action)
 
 
     ;; bind Space, Enter, and Tab in evil mode to open the file or directory

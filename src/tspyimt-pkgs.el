@@ -28,27 +28,16 @@
           (setq-default save-place t)))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Smart completion framework
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(use-package helm-config
-  :ensure helm
-  :diminish helm-mode
-  :commands (helm-find-files helm-buffers-list)
-  :init (use-package helm
-          :config (progn
-                    (helm-autoresize-mode 1)
-                    ))
-  )
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Better M-x
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(use-package smex
-  :ensure t
-  :init (progn
-          (smex-initialize)))
+;; best remove since we can use helm-m-x
+;; (use-package smex
+;;   :ensure t
+;;   :init (progn
+;;           (smex-initialize)
+;;           ))
 
 
 
@@ -185,6 +174,34 @@
             ;; (add-hook 'css-mode-hook '~auto-reload-firefox-after-save-hook)
             ))
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Projectile
+;; https://goo.gl/jN0TV
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package projectile
+  :ensure t
+  :diminish projectile-mode
+  :config
+  (progn
+    (projectile-global-mode)
+
+    ;; You can specifictly to exclude when searching by customize either of
+    ;; these variables: 
+    ;; · grep-find-ignored-files,
+    ;; · grep-find-ignored-directories,
+    ;; · projectile-globally-ignored-files,
+    ;; · projectile-globally-ignored-directories 
+    (add-to-list 'projectile-globally-ignored-directories "node_modules*")
+    (add-to-list 'projectile-globally-ignored-directories ".cache")
+
+    
+    (bind-key "M-v" nil)
+    (bind-key "M-v b o" 'projectile-find-file-other-window projectile-mode-map)
+    
+    (setq projectile-indexing-method 'alien)
+
+    ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; editorconfig

@@ -21,7 +21,7 @@
 ;;
 (bind-key "<f2>" 'save-buffer)
 (bind-key "M-<f2>" 'rename-file-and-buffer)
-(bind-key "<f3>" 'helm-find-files)
+;; (bind-key "<f3>" 'helm-find-files)
 (bind-key "M-<f3>" 'fiplr-find-file)
 (bind-key "C-<f4>" 'xah-close-current-buffer)
 (bind-key "M-<f4>" '~delete-window)
@@ -30,7 +30,7 @@
 (bind-key "C-<f8>" 'xah-open-recently-closed)
 (bind-key "C-<escape>" '~switch-to-last-buffer)
 (bind-key "C-c C-n" '~new-empty-buffer)
-;; (bind-key "<f12>" 'helm-M-x)
+
 
 
 ;;
@@ -54,14 +54,24 @@
 ;; From helm-swoop to helm-multi-swoop-all
 (define-key helm-swoop-map (kbd "M-i") 'helm-multi-swoop-all-from-helm-swoop)
 
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "C-x b") 'helm-mini)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)
+(global-set-key (kbd "C-x b") 'helm-mini)
+(global-set-key (kbd "s-\\") 'helm-semantic-or-imenu)
+(global-set-key (kbd "C-c h o") 'helm-occur)
+(global-set-key (kbd "C-x c") 'helm-lisp-completion-at-point)
+(global-set-key (kbd "C-c h M-:") 'helm-eval-expression-with-eldoc)
 ;;
 ;; window binding
-;;
+;; 
 (bind-key "<M-S-left>" 'windmove-left)
 (bind-key "<M-S-right>" 'windmove-right)
 (bind-key "<M-S-up>" 'windmove-up)
 (bind-key "<M-S-down>" 'windmove-down)
 (bind-key "C-c s" 'make-window-sticky)
+
 
 ;;
 ;; company mode
@@ -118,7 +128,7 @@
 ;; Others
 (bind-key "s-=" 'er/expand-region)
 (bind-key "M-/" 'hippie-expand)
-(bind-key "M-x" 'smex)
+;; (bind-key "M-x" 'smex)
 (bind-key "s--" 'comment-or-uncomment-region)
 (bind-key "s-w" 'whitespace-mode)
 (bind-key "s-u" 'unicode-input-mode)

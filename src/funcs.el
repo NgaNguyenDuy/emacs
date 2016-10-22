@@ -691,6 +691,9 @@ string."
   (~bind-key-with-prefix "SPC" 'helm-M-x)
 
 
+  ;; Movement
+  (~bind-key-with-prefix "\\" 'helm-semantic-or-imenu)
+
   ;; Buffer
   (~bind-key-with-prefix "s b" 'save-buffer)
   (~bind-key-with-prefix "l b" 'helm-buffers-list)
