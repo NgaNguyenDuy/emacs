@@ -176,34 +176,6 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Projectile
-;; https://goo.gl/jN0TV
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(use-package projectile
-  :ensure t
-  :diminish projectile-mode
-  :config
-  (progn
-    (projectile-global-mode)
-
-    ;; You can specifictly to exclude when searching by customize either of
-    ;; these variables: 
-    ;; · grep-find-ignored-files,
-    ;; · grep-find-ignored-directories,
-    ;; · projectile-globally-ignored-files,
-    ;; · projectile-globally-ignored-directories 
-    (add-to-list 'projectile-globally-ignored-directories "node_modules*")
-    (add-to-list 'projectile-globally-ignored-directories ".cache")
-
-    
-    (bind-key "M-v" nil)
-    (bind-key "M-v b o" 'projectile-find-file-other-window projectile-mode-map)
-    
-    (setq projectile-indexing-method 'alien)
-
-    ))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; editorconfig
 ;; https://github.com/editorconfig/editorconfig-emacs
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
