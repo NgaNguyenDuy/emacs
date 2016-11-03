@@ -130,7 +130,8 @@
 (bind-key "M-/" 'hippie-expand)
 ;; (bind-key "M-x" 'smex)
 (bind-key "s--" 'comment-or-uncomment-region)
-(bind-key "s-w" 'whitespace-mode)
+(bind-key "M-s-w" 'whitespace-mode)
+(bind-key "s-w" 'delete-trailing-whitespace)
 (bind-key "s-u" 'unicode-input-mode)
 
 
