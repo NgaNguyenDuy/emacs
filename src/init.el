@@ -33,7 +33,8 @@
 
 (require 'e:unicode-input (load-f "libs/unicode-input.el"))
 (require 'e:funcs (load-f "funcs.el"))
-;; (require 'e:skeletons (load-f "skeletons.el")) ;; disabled custom auto-insert-header
+;; (require 'e:skeletons (load-f "skeletons.el")) ;; disabled custom
+;; auto-insert-header
 (require 'e:pkg-manager (load-f "config-pkg.el"))
 (require 'e:essen-pkgs (load-f "essen-pkgs.el"))
 (require 'e:tspyimt-pkgs (load-f "tspyimt-pkgs.el"))

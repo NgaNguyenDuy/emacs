@@ -17,6 +17,9 @@
 ;; with this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 
+(defface message-text '((t (:foreground "#4F99D3" :weight bold)))
+  "Display message text."
+  :group 'setti)
 
 (defun color-theme-seti ()
   "Color theme Seti - Dark theme ispired by Atom Seti."
