@@ -159,7 +159,7 @@
                          :underline nil
                          :slant normal
                          :weight normal
-                         :height 125
+                         :height 120
                          :width normal
                          :foundry "unknown"
                          :family "Menlo"))))
