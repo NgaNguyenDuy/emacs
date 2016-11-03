@@ -38,7 +38,7 @@
       (overwrite-mode
         (set-cursor-color overwrite-color)
         (setq cursor-type overwrite-cursor-type))
-      (t 
+      (t
         (set-cursor-color normal-color)
         (setq cursor-type normal-cursor-type))))
   )
@@ -151,11 +151,23 @@ about what flexible matching means in this context."
 
 
 
-;;
-;; Rename current file interactive
-;; source: http://steve.yegge.googlepages.com/my-dot-emacs-file;;
+(defun copy-current-buffer-name ()
+  "Copy the current buffer name to the clipboard.
+This function is part of Prelude emacs."
+  (interactive)
+  (let ((filename (if (equal major-mode 'dired-mode)
+                    default-directory
+                    (buffer-name))))
+    (when filename
+      (kill-new filename)
+      (let ((mess (format "Copied current buffer file name '%s' to the clipboard" filename)))
+        (message (propertize mess 'face 'message-text))
+        ))
+    ))
+
 (defun rename-file-and-buffer (new-name)
-  "Renames both current buffer and file it's visiting to NEW-NAME."
+  "Renames both current buffer and file it's visiting to NEW-NAME.
+Ref: http://steve.yegge.googlepages.com/my-dot-emacs-file"
   (interactive "sNew name: ")
   (let ((name (buffer-name))
          (filename (buffer-file-name)))
@@ -173,23 +185,23 @@ about what flexible matching means in this context."
   "Make script executable on saving."
   (interactive)
   (if (not (= (shell-command (concat "test -x " (buffer-file-name))) 0))
-    (progn 
+    (progn
       ;; This puts message in *Message* twice, but minibuffer
       ;; output looks better.
       (message (concat "Wrote " (buffer-file-name)))
       (save-excursion
         (goto-char (point-min))
         (if (looking-at "^#!")
-          (if (= (shell-command  
+          (if (= (shell-command
                    (concat "chmod u+x " (buffer-file-name)))
                 0)
             (progn
               (shell-script-mode)
-              (message (concat 
-                       "Wrote and made executable " 
+              (message (concat
+                       "Wrote and made executable "
                          (buffer-file-name)))
               )
-            
+
             ))))
     ;; This puts message in *Message* twice, but minibuffer output
     ;; looks better.
@@ -216,12 +228,13 @@ Thank to cmpitg: https://github.com/cmpitg/emacs-cmpitg"
   )
 
 (defun ~delete-window ()
-  "Delete current window if it's not sticky/dedicated. Use prefix arg 
+  "Delete current window if it's not sticky/dedicated. Use prefix arg
 (`C-u') to force deletion if it is."
   (interactive)
   (or (and (not current-prefix-arg)
            (window-dedicated-p (selected-window))
-           (message "Window '%s' is sticky/dedicated, should you want to delete, re-invoke the command with C-u prefix."
+           (message "Window '%s' is sticky/dedicated, should you want to
+delete, re-invoke the command with C-u prefix."
                     (current-buffer)))
       (delete-window (selected-window))))
 
@@ -246,7 +259,7 @@ Thank to cmpitg: https://github.com/cmpitg/emacs-cmpitg"
 
 (defun djcb-popup (title msg)
   "Show a popup if we're on X, or echo it otherwise; TITLE is the title
-Ref: http://emacs-fu.blogspot.ae/2009/11/showing-pop-ups.html of the message, 
+Ref: http://emacs-fu.blogspot.ae/2009/11/showing-pop-ups.html of the message,
 MSG is the context."
   (interactive)
   (if (eq window-system 'x)
@@ -262,7 +275,7 @@ MSG is the context."
 ;; http://ergoemacs.org/emacs/elisp_close_buffer_open_last_closed.html
 ;;
 (defvar xah-recently-closed-buffers nil "alist of recently closed buffers.
-Each element is (buffer name, file path). The max number to track is 
+Each element is (buffer name, file path). The max number to track is
 controlled by the variable 'xah-recently-closed-buffers-max'.")
 
 (defvar xah-recently-closed-buffers-max 40 "The maximum length for
@@ -274,10 +287,10 @@ controlled by the variable 'xah-recently-closed-buffers-max'.")
 
 Similar to 'kill-buffer', with the following addition:
 
-• Prompt user to save if the buffer has been modified even if the buffer is 
+• Prompt user to save if the buffer has been modified even if the buffer is
 not associated with a file.
 • Make sure the buffer shown after closing is a user buffer.
-• If the buffer is editing a source file in an org-mode file, prompt the user 
+• If the buffer is editing a source file in an org-mode file, prompt the user
 to save before closing.
 • If the buffer is a file, add the path to the list `xah-recently-closed
 -buffers'.
@@ -493,7 +506,7 @@ E.g.
       (let* ((protocol      (match-string 1 connection-string))
               (username      (match-string 2 connection-string))
               (host-and-path (match-string 3 connection-string))
-              
+
               (host          (get-host host-and-path))
               (port          (get-port host-and-path))
               (path          (get-path host-and-path)))
@@ -684,10 +697,10 @@ string."
 (defun bind-spacemacs-like-keys ()
   "Bind keys inspired by Spacemacs."
   (interactive)
-  
+
   ;; Remove this prefix key by any chance
   (bind-key "s-SPC" 'nil)
-  
+
   (~bind-key-with-prefix "SPC" 'helm-M-x)
 
 
