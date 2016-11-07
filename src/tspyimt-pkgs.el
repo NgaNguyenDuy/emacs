@@ -111,7 +111,7 @@
                                               (getenv "WORKON_HOME")
                                               (concat
                                                 (getenv "HOME")
-                                                "/virtual-envs/"
+                                                "/L/Python/virtual-envs/"
                                                 )
                                               ))))))
 
