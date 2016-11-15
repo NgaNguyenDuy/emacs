@@ -4,6 +4,3 @@
 [submodule "src/local-pkgs/powerline"]
 	path = src/local-pkgs/powerline
 	url = git@github.com:NgaNguyenDuy/emacs-powerline.git
-[submodule "src/local-pkgs/Highlight-Indentation-for-Emacs"]
-	path = src/local-pkgs/Highlight-Indentation-for-Emacs
-	url = git@github.com:antonj/Highlight-Indentation-for-Emacs.git
