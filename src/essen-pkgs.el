@@ -289,6 +289,9 @@
   :config (progn
             (eval-after-load 'smartparens
               '(progn
+
+                 (require 'smartparens-ruby)
+
                  (smartparens-global-mode)
                  
                  (require 'smartparens-elixir
@@ -374,13 +377,6 @@
         (lambda () (setq neo-persist-show t))))
     
     ))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Smart tab mode
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(use-package smart-tabs-mode
-  :ensure t
-  )
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -503,7 +499,6 @@
             ;; utf-8.
             ;; (setq-default powerline-default-separator 'arrow)
             ))
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Docker file mode

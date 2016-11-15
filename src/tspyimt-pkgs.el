@@ -148,12 +148,6 @@
   :ensure elpy
   :init (progn
           (elpy-enable)
-
-          ;; (defun my/python-mode-hook ()
-          ;;   "Customized python mode"
-          ;;   (setq python-indent-offset 4)
-          ;;   )
-
           ;;(add-hook 'python-mode-hook 'my/python-mode-hook)
 	  ))
 
@@ -173,6 +167,12 @@
             ;; (add-hook 'html-mode-hook '~auto-reload-firefox-after-save-hook)
             ;; (add-hook 'css-mode-hook '~auto-reload-firefox-after-save-hook)
             ))
+
+
+(use-package ruby-mode
+  :ensure t
+  :commands ruby-mode
+  :mode (("\\Rakefile$" . ruby-mode)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
