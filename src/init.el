@@ -42,3 +42,4 @@
 (require 'e:settings (load-f "settings.el"))
 (require 'e:env (load-f "env.el"))
 (require 'e:keybindings (load-f "keybindings.el"))
+(require 'e:expr (load-f "expr.el"))
