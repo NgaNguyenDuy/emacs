@@ -167,7 +167,6 @@
  '(rst-level-1-face ((t (:embolden t))) t))
 
 
-;; (set-frame-font "ReemKufi:pixelsize=18")
 
 ;; Currently modeline
 ;; (require 'e:my-modeline (load-f "customize/my-modeline.el"))

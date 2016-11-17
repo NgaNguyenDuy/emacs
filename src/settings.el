@@ -17,7 +17,10 @@
 
 
 ;; Display paren mode
+(setq show-paren-delay 0) ;; delay to show paren mode
 (show-paren-mode 1)
+;; alternatives are 'parenthesis' and 'mixed'
+(setq show-paren-style 'parenthesis)
 
 ;; Show column number
 (column-number-mode 1)
@@ -72,7 +75,7 @@
 ;; keyboard scroll one line at a time
 (setq scroll-step 1)
 ;; If you don't want to be prompted before insertion
-(setq auto-insert-query nil) 
+(setq auto-insert-query nil)
 
 ;;
 ;; Config nyan-mode
