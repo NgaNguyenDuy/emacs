@@ -232,6 +232,7 @@
   :ensure t
   :diminish company-mode
   :config (progn
+            
             (global-company-mode 1)
 
             (use-package pos-tip
@@ -304,7 +305,7 @@
                    (load-f "libs/smartparens-keybinding"))
                  ;; ;; C and c++ should use RET to open block
                  ;; (sp-local-pair 'c++-mode "{" nil :post-handlers '(:add my-open-block-without-ret))
-                 ;; (sp-local-pair 'c-mode "{" nil :post-handlers '(("||\n[i]" "RET")))
+                 (sp-local-pair 'c-mode "{" nil :post-handlers '(("||\n[i]" "RET")))
                  ;; ;; Should autopair with <> in string
                  ;; (sp-local-pair 'emacs-lisp-mode "<" ">" :when '(sp-in-string-p))
                  ;; ;; Custom smartparens in exlixr mode
