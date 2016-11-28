@@ -22,6 +22,11 @@
 ;; alternatives are 'parenthesis' and 'mixed'
 (setq show-paren-style 'parenthesis)
 
+(setq-default
+  c-basic-offset 4
+  tab-width 4
+  indent-tabs-mode t)
+
 ;; Show column number
 (column-number-mode 1)
 
