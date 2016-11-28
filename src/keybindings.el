@@ -30,7 +30,7 @@
 (bind-key "C-<f8>" 'xah-open-recently-closed)
 (bind-key "C-<escape>" '~switch-to-last-buffer)
 (bind-key "C-c C-n" '~new-empty-buffer)
-
+(bind-key "C-<f1>" '~switch-to-scratch)
 
 
 ;;

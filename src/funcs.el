@@ -650,6 +650,12 @@ active buffer if current buffer is eshell."
       (previous-buffer))))
 
 
+(defun ~switch-to-scratch ()
+  "Switch to scratch buffer."
+  (interactive)
+  (switch-to-buffer "*scratch*")
+  )
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -681,6 +687,7 @@ string."
 (defun ~selection-end ()
   "Return the position of the end of the current selection."
   (region-end))
+
 
 ;; (defalias 'qrr 'query-replace-Regexp)
 
